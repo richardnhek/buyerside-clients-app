@@ -244,17 +244,54 @@ class _AllChatsWidgetState extends State<AllChatsWidget> {
                                                       mainAxisSize:
                                                           MainAxisSize.max,
                                                       children: [
-                                                        ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      3.0),
-                                                          child: Image.network(
-                                                            containerUsersRecord
-                                                                .photoUrl,
-                                                            width: 25.0,
-                                                            height: 25.0,
-                                                            fit: BoxFit.cover,
+                                                        Container(
+                                                          width: 30.0,
+                                                          height: 30.0,
+                                                          decoration:
+                                                              const BoxDecoration(),
+                                                          child: Stack(
+                                                            children: [
+                                                              ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            3.0),
+                                                                child: Image
+                                                                    .network(
+                                                                  containerUsersRecord
+                                                                      .photoUrl,
+                                                                  width: 25.0,
+                                                                  height: 25.0,
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                ),
+                                                              ),
+                                                              if (listViewChatsRecord
+                                                                      .lastMessageSeenBy
+                                                                      .contains(
+                                                                          currentUserReference) ==
+                                                                  false)
+                                                                Align(
+                                                                  alignment:
+                                                                      const AlignmentDirectional(
+                                                                          0.80,
+                                                                          0.80),
+                                                                  child:
+                                                                      Container(
+                                                                    width: 10.0,
+                                                                    height:
+                                                                        10.0,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: const Color(
+                                                                          0xFFFF2B37),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              2.0),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                            ],
                                                           ),
                                                         ),
                                                         Expanded(
@@ -420,6 +457,11 @@ class _AllChatsWidgetState extends State<AllChatsWidget> {
                                                   'Keyxho_${listViewIndex}_of_${listViewChatsRecordList.length}'),
                                               channelName: listViewChatsRecord
                                                   .channelName,
+                                              isRead: listViewChatsRecord
+                                                      .lastMessageSeenBy
+                                                      .contains(
+                                                          currentUserReference) ==
+                                                  true,
                                             ),
                                           );
                                         },

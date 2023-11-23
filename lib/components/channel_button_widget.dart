@@ -9,9 +9,11 @@ class ChannelButtonWidget extends StatefulWidget {
   const ChannelButtonWidget({
     super.key,
     required this.channelName,
+    required this.isRead,
   });
 
   final String? channelName;
+  final bool? isRead;
 
   @override
   _ChannelButtonWidgetState createState() => _ChannelButtonWidgetState();
@@ -74,26 +76,11 @@ class _ChannelButtonWidgetState extends State<ChannelButtonWidget> {
                     Align(
                       alignment: const AlignmentDirectional(0.80, 0.80),
                       child: Container(
-                        width: 15.0,
-                        height: 15.0,
+                        width: 10.0,
+                        height: 10.0,
                         decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).primary,
+                          color: const Color(0xFFFF2B37),
                           borderRadius: BorderRadius.circular(2.0),
-                        ),
-                        child: Align(
-                          alignment: const AlignmentDirectional(0.00, 0.00),
-                          child: Text(
-                            '3',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Inter',
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  fontSize: 8.0,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                          ),
                         ),
                       ),
                     ),

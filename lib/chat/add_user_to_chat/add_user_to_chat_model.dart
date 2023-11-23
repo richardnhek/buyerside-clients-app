@@ -1,5 +1,4 @@
-import '/backend/backend.dart';
-import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/chat/index.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'add_user_to_chat_widget.dart' show AddUserToChatWidget;
 import 'package:flutter/material.dart';
@@ -45,6 +44,12 @@ class AddUserToChatModel extends FlutterFlowModel<AddUserToChatWidget> {
   FormFieldController<String>? dropDownValueController;
   // Stores action output result for [Firestore Query - Query a collection] action in DropDown widget.
   UsersRecord? selectedUserDoc;
+  // Stores action output result for [Firestore Query - Query a collection] action in Button widget.
+  ChatsRecord? specificChatDoc;
+  // Stores action output result for [Firestore Query - Query a collection] action in Button widget.
+  List<UsersRecord>? addedUserDocList;
+  // Stores action output result for [Group Chat Action] action in Button widget.
+  ChatsRecord? groupChat;
 
   /// Initialization and disposal methods.
 

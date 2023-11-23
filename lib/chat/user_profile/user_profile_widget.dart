@@ -72,9 +72,9 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
               borderRadius: 30.0,
               borderWidth: 1.0,
               buttonSize: 60.0,
-              icon: const Icon(
+              icon: Icon(
                 Icons.chevron_left_outlined,
-                color: Colors.black,
+                color: FlutterFlowTheme.of(context).darkGrey,
                 size: 25.0,
               ),
               onPressed: () async {
