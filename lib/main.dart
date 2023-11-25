@@ -1,3 +1,4 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,6 @@ import 'backend/firebase/firebase_config.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
-import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'index.dart';
 
 void main() async {
@@ -144,132 +144,107 @@ class _NavBarPageState extends State<NavBarPage> {
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
-    final MediaQueryData queryData = MediaQuery.of(context);
-
     return Scaffold(
-      body: MediaQuery(
-          data: queryData
-              .removeViewInsets(removeBottom: true)
-              .removeViewPadding(removeBottom: true),
-          child: _currentPage ?? tabs[_currentPageName]!),
-      extendBody: true,
-      bottomNavigationBar: FloatingNavbar(
-        currentIndex: currentIndex,
-        onTap: (i) => setState(() {
-          _currentPage = null;
-          _currentPageName = tabs.keys.toList()[i];
-        }),
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        selectedItemColor: FlutterFlowTheme.of(context).primary,
-        unselectedItemColor: const Color(0xFFAAAAAA),
-        selectedBackgroundColor: const Color(0x00000000),
-        borderRadius: 0.0,
-        itemBorderRadius: 8.0,
-        margin: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-        padding: const EdgeInsetsDirectional.fromSTEB(0.0, 2.5, 0.0, 25.0),
-        width: double.infinity,
-        elevation: 0.0,
-        items: [
-          FloatingNavbarItem(
-            customWidget: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  currentIndex == 0 ? FFIcons.khomeActive : FFIcons.kicon,
-                  color: currentIndex == 0
-                      ? FlutterFlowTheme.of(context).primary
-                      : const Color(0xFFAAAAAA),
-                  size: currentIndex == 0 ? 18.0 : 18.0,
-                ),
-                Text(
-                  'Home',
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: currentIndex == 0
-                        ? FlutterFlowTheme.of(context).primary
-                        : const Color(0xFFAAAAAA),
-                    fontSize: 11.0,
+      body: _currentPage ?? tabs[_currentPageName],
+      // CUSTOM_CODE_STARTED
+      bottomNavigationBar: Container(
+        color: FlutterFlowTheme.of(context).secondaryBackground,
+        padding: const EdgeInsets.only(bottom: 20),
+        height: 90,
+        child: Column(
+          children: [
+            Divider(
+              height: 1.0,
+              thickness: 1.0,
+              color: FlutterFlowTheme.of(context).darkGrey3,
+            ),
+            Expanded(
+              child: Theme(
+                data: Theme.of(context).copyWith(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                    backgroundColor:
+                        FlutterFlowTheme.of(context).secondaryBackground,
                   ),
                 ),
-              ],
+                child: BottomNavigationBar(
+                  elevation: 0,
+                  currentIndex: currentIndex,
+                  onTap: (i) => setState(() {
+                    _currentPage = null;
+                    _currentPageName = tabs.keys.toList()[i];
+                  }),
+                  backgroundColor:
+                      FlutterFlowTheme.of(context).secondaryBackground,
+                  selectedItemColor: FlutterFlowTheme.of(context).primary,
+                  unselectedItemColor: const Color(0xFFAAAAAA),
+                  showSelectedLabels: true,
+                  showUnselectedLabels: true,
+                  unselectedFontSize: 10,
+                  selectedFontSize: 10,
+                  unselectedLabelStyle: GoogleFonts.inter(
+                      height: 1.5, fontWeight: FontWeight.w400),
+                  selectedLabelStyle: GoogleFonts.inter(
+                      height: 1.5, fontWeight: FontWeight.w400),
+                  type: BottomNavigationBarType.fixed,
+                  items: const <BottomNavigationBarItem>[
+                    BottomNavigationBarItem(
+                      icon: Icon(
+                        FFIcons.kicon,
+                        size: 18.0,
+                      ),
+                      activeIcon: Icon(
+                        FFIcons.khomeActive,
+                        size: 18.0,
+                      ),
+                      label: 'Home',
+                      tooltip: '',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(
+                        FFIcons.kchat,
+                        size: 18.0,
+                      ),
+                      activeIcon: Icon(
+                        FFIcons.kchatActive,
+                        size: 18.0,
+                      ),
+                      label: 'Chats',
+                      tooltip: '',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(
+                        FFIcons.kservices,
+                        size: 18.0,
+                      ),
+                      activeIcon: Icon(
+                        FFIcons.kservicesActive,
+                        size: 18.0,
+                      ),
+                      label: 'Services',
+                      tooltip: '',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(
+                        FFIcons.krefer,
+                        size: 18.0,
+                      ),
+                      activeIcon: Icon(
+                        FFIcons.krefer,
+                        size: 18.0,
+                      ),
+                      label: 'Refer',
+                      tooltip: '',
+                    )
+                  ],
+                ),
+              ),
             ),
-          ),
-          FloatingNavbarItem(
-            customWidget: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  currentIndex == 1 ? FFIcons.kchatActive : FFIcons.kchat,
-                  color: currentIndex == 1
-                      ? FlutterFlowTheme.of(context).primary
-                      : const Color(0xFFAAAAAA),
-                  size: currentIndex == 1 ? 18.0 : 18.0,
-                ),
-                Text(
-                  'Chats',
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: currentIndex == 1
-                        ? FlutterFlowTheme.of(context).primary
-                        : const Color(0xFFAAAAAA),
-                    fontSize: 11.0,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          FloatingNavbarItem(
-            customWidget: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  currentIndex == 2
-                      ? FFIcons.kservicesActive
-                      : FFIcons.kservices,
-                  color: currentIndex == 2
-                      ? FlutterFlowTheme.of(context).primary
-                      : const Color(0xFFAAAAAA),
-                  size: currentIndex == 2 ? 18.0 : 18.0,
-                ),
-                Text(
-                  'Services',
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: currentIndex == 2
-                        ? FlutterFlowTheme.of(context).primary
-                        : const Color(0xFFAAAAAA),
-                    fontSize: 11.0,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          FloatingNavbarItem(
-            customWidget: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  currentIndex == 3 ? FFIcons.krefer : FFIcons.krefer,
-                  color: currentIndex == 3
-                      ? FlutterFlowTheme.of(context).primary
-                      : const Color(0xFFAAAAAA),
-                  size: currentIndex == 3 ? 18.0 : 18.0,
-                ),
-                Text(
-                  'Refer',
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: currentIndex == 3
-                        ? FlutterFlowTheme.of(context).primary
-                        : const Color(0xFFAAAAAA),
-                    fontSize: 11.0,
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
+          ],
+        ),
       ),
+      // CUSTOM_CODE_ENDED
     );
   }
 }

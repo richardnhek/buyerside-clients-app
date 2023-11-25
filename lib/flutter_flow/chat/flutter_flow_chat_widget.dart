@@ -268,11 +268,10 @@ class _FFChatWidgetState extends State<FFChatWidget> {
                     inputToolbarPadding: const EdgeInsets.only(
                       left: 16,
                       right: 16,
-                      bottom: 8,
+                      bottom: 0,
                       top: 0,
                     ),
-                    inputToolbarMargin:
-                        const EdgeInsets.only(bottom: 10.0, top: 20.0),
+                    inputToolbarMargin: const EdgeInsets.only(top: 20.0),
                     inputDecoration: InputDecoration(
                       hintText: "Message @${widget.otherUser.firstName}",
                       hintStyle: widget.inputHintTextStyle ??
@@ -487,7 +486,48 @@ class _FFChatWidgetState extends State<FFChatWidget> {
               ),
             ),
             if (widget.messages.isEmpty && widget.emptyChatWidget != null)
-              Center(child: widget.emptyChatWidget),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 15),
+                    child: Container(
+                      width: 38,
+                      height: 38,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4.0),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(4.0),
+                        child: FadeInImage.memoryNetwork(
+                          placeholder: transparentImage,
+                          image: widget.otherUser.profileImage!,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Text(
+                    widget.otherUser.firstName ?? '',
+                    style: GoogleFonts.inter(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    child: Text(
+                      "Hello deerie. I help those with cats find the perfect property. Specialities: NSW. Cats.",
+                      style: GoogleFonts.inter(
+                          color: const Color(0xFF848484),
+                          fontSize: 14,
+                          height: 1.5),
+                    ),
+                  )
+                ],
+              ),
           ],
         ),
       ),
