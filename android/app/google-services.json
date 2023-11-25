@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1006383313110",
+    "project_id": "mortgage-chat-40152",
+    "storage_bucket": "mortgage-chat-40152.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1006383313110:android:c2de4ce5532b246c239977",
+        "android_client_info": {
+          "package_name": "com.mycompany.mortgagechatapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5ZVxn29uP2cfIrx-rYPxho5248ZqGcqQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1006383313110:android:1468f2f9f34f443e239977",
+        "android_client_info": {
+          "package_name": "com.richardnhek.mortgagebrokerwebapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5ZVxn29uP2cfIrx-rYPxho5248ZqGcqQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
