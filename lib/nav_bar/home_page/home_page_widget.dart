@@ -117,8 +117,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              20.0, 20.0, 20.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,15 +129,15 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Container(
-                                    width: 110,
-                                    decoration: BoxDecoration(),
+                                    width: 110.0,
+                                    decoration: const BoxDecoration(),
                                     child: Text(
                                       'Full name',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Inter',
-                                            fontSize: 15,
+                                            fontSize: 15.0,
                                             fontWeight: FontWeight.normal,
                                             lineHeight: 1.5,
                                           ),
@@ -145,22 +145,23 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   ),
                                   Expanded(
                                     child: Container(
-                                      height: 50,
+                                      height: 50.0,
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
                                             .primaryBtnText,
-                                        boxShadow: [
+                                        boxShadow: const [
                                           BoxShadow(
-                                            blurRadius: 4,
+                                            blurRadius: 4.0,
                                             color: Color(0x14000000),
-                                            offset: Offset(0, 2),
+                                            offset: Offset(0.0, 2.0),
                                           )
                                         ],
-                                        borderRadius: BorderRadius.circular(4),
+                                        borderRadius:
+                                            BorderRadius.circular(4.0),
                                         border: Border.all(
                                           color: FlutterFlowTheme.of(context)
                                               .darkGrey3,
-                                          width: 1,
+                                          width: 1.0,
                                         ),
                                       ),
                                       child: AuthUserStreamWidget(
@@ -170,7 +171,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           onChanged: (_) =>
                                               EasyDebounce.debounce(
                                             '_model.fullNameController',
-                                            Duration(milliseconds: 100),
+                                            const Duration(milliseconds: 100),
                                             () async {
                                               setState(() {
                                                 _model.isChanged = true;
@@ -187,7 +188,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primaryText,
-                                                  fontSize: 15,
+                                                  fontSize: 15.0,
                                                   fontWeight: FontWeight.normal,
                                                 ),
                                             enabledBorder: InputBorder.none,
@@ -196,8 +197,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             focusedErrorBorder:
                                                 InputBorder.none,
                                             contentPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10, 10, 10, 10),
+                                                const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                    10.0, 10.0, 10.0, 10.0),
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .headlineMedium
@@ -206,7 +208,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primaryText,
-                                                fontSize: 15,
+                                                fontSize: 15.0,
                                                 fontWeight: FontWeight.normal,
                                               ),
                                           validator: _model
@@ -219,23 +221,23 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 ],
                               ),
                               Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 20.0, 0.0, 0.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     Container(
-                                      width: 110,
-                                      decoration: BoxDecoration(),
+                                      width: 110.0,
+                                      decoration: const BoxDecoration(),
                                       child: Text(
                                         'Profile photo',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Inter',
-                                              fontSize: 15,
+                                              fontSize: 15.0,
                                               fontWeight: FontWeight.normal,
                                               lineHeight: 1.5,
                                             ),
@@ -243,7 +245,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     ),
                                     Expanded(
                                       child: Container(
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Colors.transparent,
                                         ),
                                         child: Row(
@@ -253,15 +255,15 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           children: [
                                             ClipRRect(
                                               borderRadius:
-                                                  BorderRadius.circular(5),
+                                                  BorderRadius.circular(5.0),
                                               child: CachedNetworkImage(
-                                                fadeInDuration:
-                                                    Duration(milliseconds: 500),
-                                                fadeOutDuration:
-                                                    Duration(milliseconds: 500),
+                                                fadeInDuration: const Duration(
+                                                    milliseconds: 500),
+                                                fadeOutDuration: const Duration(
+                                                    milliseconds: 500),
                                                 imageUrl: _model.userProPic,
-                                                width: 50,
-                                                height: 50,
+                                                width: 50.0,
+                                                height: 50.0,
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
@@ -370,22 +372,22 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                   });
                                                 },
                                                 child: Container(
-                                                  height: 50,
+                                                  height: 50.0,
                                                   decoration: BoxDecoration(
                                                     color: Colors.transparent,
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            5),
+                                                            5.0),
                                                     border: Border.all(
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .darkGrey3,
-                                                      width: 1,
+                                                      width: 1.0,
                                                     ),
                                                   ),
                                                   alignment:
-                                                      AlignmentDirectional(
+                                                      const AlignmentDirectional(
                                                           0.00, 0.00),
                                                   child: Text(
                                                     'Upload',
@@ -394,7 +396,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                         .bodyMedium
                                                         .override(
                                                           fontFamily: 'Inter',
-                                                          fontSize: 15,
+                                                          fontSize: 15.0,
                                                           fontWeight:
                                                               FontWeight.normal,
                                                         ),
@@ -432,22 +434,22 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                       .delete();
                                                 },
                                                 child: Container(
-                                                  height: 50,
+                                                  height: 50.0,
                                                   decoration: BoxDecoration(
                                                     color: Colors.transparent,
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            5),
+                                                            5.0),
                                                     border: Border.all(
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .darkGrey3,
-                                                      width: 1,
+                                                      width: 1.0,
                                                     ),
                                                   ),
                                                   alignment:
-                                                      AlignmentDirectional(
+                                                      const AlignmentDirectional(
                                                           0.00, 0.00),
                                                   child: Text(
                                                     'Remove',
@@ -459,7 +461,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .accent1,
-                                                          fontSize: 15,
+                                                          fontSize: 15.0,
                                                           fontWeight:
                                                               FontWeight.normal,
                                                         ),
@@ -467,7 +469,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 ),
                                               ),
                                             ),
-                                          ].divide(SizedBox(width: 10)),
+                                          ].divide(const SizedBox(width: 10.0)),
                                         ),
                                       ),
                                     ),
@@ -475,8 +477,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 ),
                               ),
                               Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 35, 0, 0),
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 35.0, 0.0, 0.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
@@ -504,14 +506,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               },
                                         text: 'Discard changes',
                                         options: FFButtonOptions(
-                                          height: 50,
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 0, 0),
+                                          height: 50.0,
+                                          padding: const EdgeInsetsDirectional
+                                              .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                           iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 0, 0),
-                                          color: Color(0x00FFFFFF),
+                                              const EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                          color: const Color(0x00FFFFFF),
                                           textStyle: FlutterFlowTheme.of(
                                                   context)
                                               .titleSmall
@@ -520,16 +521,16 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primaryText,
-                                                fontSize: 16,
+                                                fontSize: 16.0,
                                                 fontWeight: FontWeight.normal,
                                               ),
-                                          elevation: 0,
-                                          borderSide: BorderSide(
+                                          elevation: 0.0,
+                                          borderSide: const BorderSide(
                                             color: Color(0x7914181B),
-                                            width: 1,
+                                            width: 1.0,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(8),
+                                              BorderRadius.circular(8.0),
                                           disabledTextColor:
                                               FlutterFlowTheme.of(context)
                                                   .darkGrey4,
@@ -554,13 +555,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               },
                                         text: 'Save Changes',
                                         options: FFButtonOptions(
-                                          height: 50,
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 0, 0),
+                                          height: 50.0,
+                                          padding: const EdgeInsetsDirectional
+                                              .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                           iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 0, 0),
+                                              const EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                           color: FlutterFlowTheme.of(context)
                                               .accent1,
                                           textStyle:
@@ -569,36 +569,37 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                   .override(
                                                     fontFamily: 'Inter',
                                                     color: Colors.white,
-                                                    fontSize: 16,
+                                                    fontSize: 16.0,
                                                     fontWeight:
                                                         FontWeight.normal,
                                                   ),
-                                          elevation: 0,
-                                          borderSide: BorderSide(
+                                          elevation: 0.0,
+                                          borderSide: const BorderSide(
                                             color: Color(0x49105035),
-                                            width: 1,
+                                            width: 1.0,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(8),
+                                              BorderRadius.circular(8.0),
                                           disabledColor:
                                               FlutterFlowTheme.of(context)
                                                   .darkGrey4,
                                         ),
                                       ),
                                     ),
-                                  ].divide(SizedBox(width: 15)),
+                                  ].divide(const SizedBox(width: 15.0)),
                                 ),
                               ),
                             ],
                           ),
                         ),
                         Divider(
-                          height: 60,
-                          thickness: 1,
+                          height: 60.0,
+                          thickness: 1.0,
                           color: FlutterFlowTheme.of(context).darkGrey3,
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              20.0, 0.0, 20.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -611,27 +612,27 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       fontFamily: 'Inter',
                                       color: FlutterFlowTheme.of(context)
                                           .primaryText,
-                                      fontSize: 17,
+                                      fontSize: 17.0,
                                     ),
                               ),
                               Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 25, 0, 0),
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 25.0, 0.0, 0.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(
-                                      width: 110,
-                                      decoration: BoxDecoration(),
+                                      width: 110.0,
+                                      decoration: const BoxDecoration(),
                                       child: Text(
                                         'Email address',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Inter',
-                                              fontSize: 15,
+                                              fontSize: 15.0,
                                               fontWeight: FontWeight.normal,
                                               lineHeight: 1.5,
                                             ),
@@ -639,23 +640,23 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     ),
                                     Expanded(
                                       child: Container(
-                                        height: 50,
+                                        height: 50.0,
                                         decoration: BoxDecoration(
                                           color: FlutterFlowTheme.of(context)
                                               .primaryBtnText,
-                                          boxShadow: [
+                                          boxShadow: const [
                                             BoxShadow(
-                                              blurRadius: 4,
+                                              blurRadius: 4.0,
                                               color: Color(0x14000000),
-                                              offset: Offset(0, 2),
+                                              offset: Offset(0.0, 2.0),
                                             )
                                           ],
                                           borderRadius:
-                                              BorderRadius.circular(4),
+                                              BorderRadius.circular(4.0),
                                           border: Border.all(
                                             color: FlutterFlowTheme.of(context)
                                                 .darkGrey3,
-                                            width: 1,
+                                            width: 1.0,
                                           ),
                                         ),
                                         child: TextFormField(
@@ -664,7 +665,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           onChanged: (_) =>
                                               EasyDebounce.debounce(
                                             '_model.emailController',
-                                            Duration(milliseconds: 100),
+                                            const Duration(milliseconds: 100),
                                             () async {
                                               setState(() {
                                                 _model.isEmailChanged = true;
@@ -682,7 +683,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .secondaryText,
-                                                  fontSize: 15,
+                                                  fontSize: 15.0,
                                                   fontWeight: FontWeight.normal,
                                                 ),
                                             enabledBorder: InputBorder.none,
@@ -691,8 +692,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             focusedErrorBorder:
                                                 InputBorder.none,
                                             contentPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10, 10, 10, 10),
+                                                const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                    10.0, 10.0, 10.0, 10.0),
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .headlineMedium
@@ -701,7 +703,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primaryText,
-                                                fontSize: 15,
+                                                fontSize: 15.0,
                                                 fontWeight: FontWeight.normal,
                                               ),
                                           validator: _model
@@ -714,8 +716,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 ),
                               ),
                               Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 35, 0, 0),
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 35.0, 0.0, 0.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
@@ -735,14 +737,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               },
                                         text: 'Discard changes',
                                         options: FFButtonOptions(
-                                          height: 50,
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 0, 0),
+                                          height: 50.0,
+                                          padding: const EdgeInsetsDirectional
+                                              .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                           iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 0, 0),
-                                          color: Color(0x00FFFFFF),
+                                              const EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                          color: const Color(0x00FFFFFF),
                                           textStyle: FlutterFlowTheme.of(
                                                   context)
                                               .titleSmall
@@ -751,16 +752,16 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primaryText,
-                                                fontSize: 16,
+                                                fontSize: 16.0,
                                                 fontWeight: FontWeight.normal,
                                               ),
-                                          elevation: 0,
-                                          borderSide: BorderSide(
+                                          elevation: 0.0,
+                                          borderSide: const BorderSide(
                                             color: Color(0x7814181B),
-                                            width: 1,
+                                            width: 1.0,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(8),
+                                              BorderRadius.circular(8.0),
                                           disabledTextColor:
                                               FlutterFlowTheme.of(context)
                                                   .darkGrey4,
@@ -775,13 +776,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 : () async {},
                                         text: 'Save Changes',
                                         options: FFButtonOptions(
-                                          height: 50,
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  24, 0, 24, 0),
+                                          height: 50.0,
+                                          padding: const EdgeInsetsDirectional
+                                              .fromSTEB(24.0, 0.0, 24.0, 0.0),
                                           iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 0, 0),
+                                              const EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                           color: FlutterFlowTheme.of(context)
                                               .accent1,
                                           textStyle:
@@ -790,37 +790,37 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                   .override(
                                                     fontFamily: 'Inter',
                                                     color: Colors.white,
-                                                    fontSize: 16,
+                                                    fontSize: 16.0,
                                                     fontWeight:
                                                         FontWeight.normal,
                                                   ),
-                                          elevation: 0,
-                                          borderSide: BorderSide(
+                                          elevation: 0.0,
+                                          borderSide: const BorderSide(
                                             color: Color(0x49105035),
-                                            width: 1,
+                                            width: 1.0,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(8),
+                                              BorderRadius.circular(8.0),
                                           disabledColor:
                                               FlutterFlowTheme.of(context)
                                                   .darkGrey4,
                                         ),
                                       ),
                                     ),
-                                  ].divide(SizedBox(width: 15)),
+                                  ].divide(const SizedBox(width: 15.0)),
                                 ),
                               ),
                             ],
                           ),
                         ),
                         Divider(
-                          height: 60,
-                          thickness: 1,
+                          height: 60.0,
+                          thickness: 1.0,
                           color: FlutterFlowTheme.of(context).darkGrey3,
                         ),
                         Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              20.0, 20.0, 20.0, 0.0),
                           child: FFButtonWidget(
                             onPressed: () async {
                               GoRouter.of(context).prepareAuthEvent();
@@ -832,28 +832,28 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             text: 'Logout',
                             options: FFButtonOptions(
                               width: double.infinity,
-                              height: 50,
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                              iconPadding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                              color: Color(0xFFFF4952),
+                              height: 50.0,
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: const Color(0xFFFF4952),
                               textStyle: FlutterFlowTheme.of(context)
                                   .titleSmall
                                   .override(
                                     fontFamily: 'Inter',
                                     color: Colors.white,
                                   ),
-                              elevation: 0,
-                              borderSide: BorderSide(
+                              elevation: 0.0,
+                              borderSide: const BorderSide(
                                 color: Colors.transparent,
-                                width: 0,
+                                width: 0.0,
                               ),
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(8.0),
                             ),
                           ),
                         ),
-                      ].addToEnd(SizedBox(height: 75)),
+                      ].addToEnd(const SizedBox(height: 75.0)),
                     ),
                   ),
                 ),

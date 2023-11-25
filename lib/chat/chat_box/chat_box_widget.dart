@@ -96,17 +96,17 @@ class _ChatBoxWidgetState extends State<ChatBoxWidget> {
               children: [
                 Container(
                   width: double.infinity,
-                  height: 100,
+                  height: 100.0,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                   ),
-                  alignment: AlignmentDirectional(-1.00, 1.00),
+                  alignment: const AlignmentDirectional(-1.00, 1.00),
                   child: Builder(
                     builder: (context) {
                       if (isGroupChat() == false) {
                         return Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(10, 0, 20, 15),
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              10.0, 0.0, 20.0, 15.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -122,12 +122,12 @@ class _ChatBoxWidgetState extends State<ChatBoxWidget> {
                                 child: Icon(
                                   Icons.arrow_back_ios_rounded,
                                   color: FlutterFlowTheme.of(context).darkGrey,
-                                  size: 16,
+                                  size: 16.0,
                                 ),
                               ),
                               Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 0.0, 0.0, 0.0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
                                   focusColor: Colors.transparent,
@@ -155,17 +155,18 @@ class _ChatBoxWidgetState extends State<ChatBoxWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       ClipRRect(
-                                        borderRadius: BorderRadius.circular(4),
+                                        borderRadius:
+                                            BorderRadius.circular(4.0),
                                         child: Image.network(
                                           widget.chatUser!.photoUrl,
-                                          width: 25,
-                                          height: 25,
+                                          width: 25.0,
+                                          height: 25.0,
                                           fit: BoxFit.cover,
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            10, 0, 0, 0),
+                                        padding: const EdgeInsetsDirectional
+                                            .fromSTEB(10.0, 0.0, 0.0, 0.0),
                                         child: Text(
                                           valueOrDefault<String>(
                                             widget.chatUser?.displayName,
@@ -175,7 +176,7 @@ class _ChatBoxWidgetState extends State<ChatBoxWidget> {
                                               .bodyMedium
                                               .override(
                                                 fontFamily: 'Inter',
-                                                fontSize: 17,
+                                                fontSize: 17.0,
                                               ),
                                         ),
                                       ),
@@ -188,7 +189,8 @@ class _ChatBoxWidgetState extends State<ChatBoxWidget> {
                         );
                       } else {
                         return Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 15),
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 15.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -204,13 +206,13 @@ class _ChatBoxWidgetState extends State<ChatBoxWidget> {
                                 child: Icon(
                                   Icons.arrow_back_ios_rounded,
                                   color: FlutterFlowTheme.of(context).darkGrey,
-                                  size: 16,
+                                  size: 16.0,
                                 ),
                               ),
                               Expanded(
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10, 0, 0, 0),
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      10.0, 0.0, 0.0, 0.0),
                                   child: FutureBuilder<ChatsRecord>(
                                     future: ChatsRecord.getDocumentOnce(
                                         widget.chatRef!),
@@ -219,8 +221,8 @@ class _ChatBoxWidgetState extends State<ChatBoxWidget> {
                                       if (!snapshot.hasData) {
                                         return Center(
                                           child: SizedBox(
-                                            width: 50,
-                                            height: 50,
+                                            width: 50.0,
+                                            height: 50.0,
                                             child: CircularProgressIndicator(
                                               valueColor:
                                                   AlwaysStoppedAnimation<Color>(
@@ -250,7 +252,7 @@ class _ChatBoxWidgetState extends State<ChatBoxWidget> {
                                           );
                                         },
                                         child: Container(
-                                          decoration: BoxDecoration(),
+                                          decoration: const BoxDecoration(),
                                           child:
                                               FutureBuilder<List<UsersRecord>>(
                                             future: queryUsersRecordOnce(
@@ -266,8 +268,8 @@ class _ChatBoxWidgetState extends State<ChatBoxWidget> {
                                               if (!snapshot.hasData) {
                                                 return Center(
                                                   child: SizedBox(
-                                                    width: 50,
-                                                    height: 50,
+                                                    width: 50.0,
+                                                    height: 50.0,
                                                     child:
                                                         CircularProgressIndicator(
                                                       valueColor:
@@ -285,7 +287,8 @@ class _ChatBoxWidgetState extends State<ChatBoxWidget> {
                                                   containerUsersRecordList =
                                                   snapshot.data!;
                                               return Container(
-                                                decoration: BoxDecoration(),
+                                                decoration:
+                                                    const BoxDecoration(),
                                                 child: Text(
                                                   '${containerUsersRecordList.first.displayName}, ${containerUsersRecordList[1].displayName}, ${containerUsersRecordList.last.displayName}',
                                                   style: FlutterFlowTheme.of(
@@ -293,7 +296,7 @@ class _ChatBoxWidgetState extends State<ChatBoxWidget> {
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily: 'Inter',
-                                                        fontSize: 17,
+                                                        fontSize: 17.0,
                                                         fontWeight:
                                                             FontWeight.w500,
                                                       ),
@@ -316,10 +319,10 @@ class _ChatBoxWidgetState extends State<ChatBoxWidget> {
                 ),
               ],
             ),
-            actions: [],
+            actions: const [],
             centerTitle: false,
-            toolbarHeight: 100,
-            elevation: 0,
+            toolbarHeight: 100.0,
+            elevation: 0.0,
           )
         ],
         body: Builder(
@@ -343,39 +346,39 @@ class _ChatBoxWidgetState extends State<ChatBoxWidget> {
                           border: Border.all(
                             color: Colors.transparent,
                           ),
-                          borderRadius: BorderRadius.circular(15),
+                          borderRadius: BorderRadius.circular(15.0),
                         ),
                         otherUsersBoxDecoration: BoxDecoration(
                           color: FlutterFlowTheme.of(context).primaryBtnText,
                           border: Border.all(
                             color: Colors.transparent,
                           ),
-                          borderRadius: BorderRadius.circular(15),
+                          borderRadius: BorderRadius.circular(15.0),
                         ),
                         currentUserTextStyle: GoogleFonts.getFont(
                           'DM Sans',
                           color: FlutterFlowTheme.of(context).primaryBtnText,
                           fontWeight: FontWeight.w500,
-                          fontSize: 14,
+                          fontSize: 14.0,
                           fontStyle: FontStyle.normal,
                         ),
                         otherUsersTextStyle: GoogleFonts.getFont(
                           'DM Sans',
                           color: FlutterFlowTheme.of(context).primaryText,
                           fontWeight: FontWeight.w500,
-                          fontSize: 14,
+                          fontSize: 14.0,
                         ),
                         inputHintTextStyle: GoogleFonts.getFont(
                           'Inter',
-                          color: Color(0xFF95A1AC),
+                          color: const Color(0xFF95A1AC),
                           fontWeight: FontWeight.normal,
-                          fontSize: 14,
+                          fontSize: 14.0,
                         ),
                         inputTextStyle: GoogleFonts.getFont(
                           'Inter',
                           color: Colors.black,
                           fontWeight: FontWeight.normal,
-                          fontSize: 14,
+                          fontSize: 14.0,
                         ),
                         emptyChatWidget: Image.asset(
                           'assets/images/messagesEmpty@2x.png',
@@ -384,8 +387,8 @@ class _ChatBoxWidgetState extends State<ChatBoxWidget> {
                       )
                     : Center(
                         child: SizedBox(
-                          width: 50,
-                          height: 50,
+                          width: 50.0,
+                          height: 50.0,
                           child: CircularProgressIndicator(
                             valueColor: AlwaysStoppedAnimation<Color>(
                               FlutterFlowTheme.of(context).primary,

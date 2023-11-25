@@ -194,6 +194,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             userProfilePic: params.getParam('userProfilePic', ParamType.String),
             userDoc: params.getParam('userDoc', ParamType.Document),
           ),
+        ),
+        FFRoute(
+          name: 'StartNewChat',
+          path: '/startNewChat',
+          builder: (context, params) => StartNewChatWidget(
+            userRefList: params.getParam<DocumentReference>(
+                'userRefList', ParamType.DocumentReference, true, ['users']),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
