@@ -153,6 +153,9 @@ final parametersBuilderMap =
               data, 'userDoc', UsersRecord.fromSnapshot),
         },
       ),
+  'StartNewChat': (data) async => const ParameterData(
+        allParams: {},
+      ),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

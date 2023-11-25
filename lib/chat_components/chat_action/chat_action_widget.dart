@@ -120,24 +120,27 @@ class _ChatActionWidgetState extends State<ChatActionWidget> {
             thickness: 1.0,
             color: Color(0x1514181B),
           ),
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
-                  child: Icon(
-                    Icons.link_outlined,
-                    color: FlutterFlowTheme.of(context).secondaryText,
-                    size: 24.0,
+          Align(
+            alignment: const AlignmentDirectional(-1.00, -1.00),
+            child: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                    child: Icon(
+                      Icons.link_outlined,
+                      color: FlutterFlowTheme.of(context).secondaryText,
+                      size: 24.0,
+                    ),
                   ),
-                ),
-                Text(
-                  'Upload Files',
-                  style: FlutterFlowTheme.of(context).bodyMedium,
-                ),
-              ],
+                  Text(
+                    'Upload Files',
+                    style: FlutterFlowTheme.of(context).bodyMedium,
+                  ),
+                ],
+              ),
             ),
           ),
         ],

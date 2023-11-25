@@ -17,3 +17,4 @@ export '/service/all_services/all_services_widget.dart' show AllServicesWidget;
 export '/service/order_inspection/order_inspection_widget.dart'
     show OrderInspectionWidget;
 export '/profile/profile_widget.dart' show ProfileWidget;
+export '/start_new_chat/start_new_chat_widget.dart' show StartNewChatWidget;
