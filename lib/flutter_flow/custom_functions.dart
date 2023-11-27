@@ -25,3 +25,35 @@ String? getFileName(String? imagePath) {
   var segments = decodedUrl.split('/');
   return segments.isNotEmpty ? segments.last.split('?').first : null;
 }
+
+List<DocumentReference>? getListOfUnrelatedUsers(
+  List<DocumentReference> workspaceMembers,
+  List<ChatsRecord> chatDocsList,
+) {
+  // Initialize an empty list that will hold the references of users who have not started a chat
+  List<DocumentReference> unrelatedUsers = [];
+
+  // Create a set of all user references that the current user has chatted with
+  Set<DocumentReference> usersWithChats = {};
+
+  for (var chatDoc in chatDocsList) {
+    // Assuming the 'users' field is a list of DocumentReferences
+    List<dynamic> chatUsers = chatDoc.users;
+    print("chatUsers: $chatUsers");
+    usersWithChats.addAll(chatUsers.cast<DocumentReference>());
+    print("usersWithChats: $usersWithChats");
+  }
+
+  // Iterate over the workspace members
+  for (var member in workspaceMembers) {
+    // Check if the member is not in the set of usersWithChats
+    if (!usersWithChats.contains(member)) {
+      // If the member is not in the usersWithChats, then the current user has not chatted with them
+      // Add them to the list of unrelated users
+      unrelatedUsers.add(member);
+    }
+  }
+  print("unrelatedUsers: $unrelatedUsers");
+  // Return the list of users who are in the same workspace but have not started a chat with the current user
+  return unrelatedUsers;
+}

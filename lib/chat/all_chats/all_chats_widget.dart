@@ -407,21 +407,8 @@ class _AllChatsWidgetState extends State<AllChatsWidget> {
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
-                                                context.pushNamed(
-                                                  'StartNewChat',
-                                                  queryParameters: {
-                                                    'userRefList':
-                                                        serializeParam(
-                                                      containerChatsRecordList
-                                                          .map((e) => e.userB)
-                                                          .withoutNulls
-                                                          .toList(),
-                                                      ParamType
-                                                          .DocumentReference,
-                                                      true,
-                                                    ),
-                                                  }.withoutNulls,
-                                                );
+                                                context
+                                                    .pushNamed('StartNewChat');
                                               },
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.min,
