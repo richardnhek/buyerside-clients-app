@@ -198,10 +198,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'StartNewChat',
           path: '/startNewChat',
-          builder: (context, params) => StartNewChatWidget(
-            userRefList: params.getParam<DocumentReference>(
-                'userRefList', ParamType.DocumentReference, true, ['users']),
-          ),
+          builder: (context, params) => const StartNewChatWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

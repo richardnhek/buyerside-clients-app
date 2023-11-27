@@ -49,10 +49,15 @@ class UsersRecord extends FirestoreRecord {
   DocumentReference? get userRef => _userRef;
   bool hasUserRef() => _userRef != null;
 
-  // "workspace_ids" field.
-  String? _workspaceIds;
-  String get workspaceIds => _workspaceIds ?? '';
-  bool hasWorkspaceIds() => _workspaceIds != null;
+  // "workspace_refs" field.
+  List<DocumentReference>? _workspaceRefs;
+  List<DocumentReference> get workspaceRefs => _workspaceRefs ?? const [];
+  bool hasWorkspaceRefs() => _workspaceRefs != null;
+
+  // "user_type" field.
+  String? _userType;
+  String get userType => _userType ?? '';
+  bool hasUserType() => _userType != null;
 
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
@@ -62,7 +67,8 @@ class UsersRecord extends FirestoreRecord {
     _createdTime = snapshotData['created_time'] as DateTime?;
     _phoneNumber = snapshotData['phone_number'] as String?;
     _userRef = snapshotData['user_ref'] as DocumentReference?;
-    _workspaceIds = snapshotData['workspace_ids'] as String?;
+    _workspaceRefs = getDataList(snapshotData['workspace_refs']);
+    _userType = snapshotData['user_type'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -106,7 +112,7 @@ Map<String, dynamic> createUsersRecordData({
   DateTime? createdTime,
   String? phoneNumber,
   DocumentReference? userRef,
-  String? workspaceIds,
+  String? userType,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -117,7 +123,7 @@ Map<String, dynamic> createUsersRecordData({
       'created_time': createdTime,
       'phone_number': phoneNumber,
       'user_ref': userRef,
-      'workspace_ids': workspaceIds,
+      'user_type': userType,
     }.withoutNulls,
   );
 
@@ -129,6 +135,7 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
 
   @override
   bool equals(UsersRecord? e1, UsersRecord? e2) {
+    const listEquality = ListEquality();
     return e1?.email == e2?.email &&
         e1?.displayName == e2?.displayName &&
         e1?.photoUrl == e2?.photoUrl &&
@@ -136,7 +143,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.createdTime == e2?.createdTime &&
         e1?.phoneNumber == e2?.phoneNumber &&
         e1?.userRef == e2?.userRef &&
-        e1?.workspaceIds == e2?.workspaceIds;
+        listEquality.equals(e1?.workspaceRefs, e2?.workspaceRefs) &&
+        e1?.userType == e2?.userType;
   }
 
   @override
@@ -148,7 +156,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.createdTime,
         e?.phoneNumber,
         e?.userRef,
-        e?.workspaceIds
+        e?.workspaceRefs,
+        e?.userType
       ]);
 
   @override
