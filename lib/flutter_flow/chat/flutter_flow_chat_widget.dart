@@ -1,4 +1,5 @@
 // CUSTOM_CODE_STARTED
+import 'package:flutter/services.dart';
 import 'package:mortgage_chat_app/chat_components/chat_action/chat_action_widget.dart';
 
 import '../flutter_flow_theme.dart';
@@ -131,12 +132,21 @@ class FFChatWidget extends StatefulWidget {
 class _FFChatWidgetState extends State<FFChatWidget> {
   TextEditingController textEditingController = TextEditingController();
   Map<String, bool> messageHoverStates = {};
+  ChatMessage? _editingMessage;
 
   @override
   void dispose() {
     textEditingController.dispose();
 
     super.dispose();
+  }
+
+  void _initiateMessageEditing(ChatMessage message) {
+    setState(() {
+      _editingMessage = message;
+      textEditingController.text = message.text; //
+    });
+    Navigator.pop(context); // Close the modal
   }
 
   Future<void> _deleteMessage(DocumentReference chatMessageRef) async {
@@ -454,46 +464,60 @@ class _FFChatWidgetState extends State<FFChatWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .secondaryBackground,
                                             ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                      0.0, 8.0, 0.0, 8.0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsetsDirectional
-                                                            .fromSTEB(12.0, 0.0,
-                                                            0.0, 0.0),
-                                                    child: Icon(
-                                                      Icons.edit_square,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                      size: 20.0,
-                                                    ),
-                                                  ),
-                                                  Expanded(
+                                            child: message.user.id ==
+                                                    widget.currentUser.id
+                                                ? GestureDetector(
+                                                    onTap: () {
+                                                      _initiateMessageEditing(
+                                                          message);
+                                                    },
                                                     child: Padding(
                                                       padding:
                                                           const EdgeInsetsDirectional
-                                                              .fromSTEB(12.0,
-                                                              0.0, 0.0, 0.0),
-                                                      child: Text(
-                                                        'Edit message',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium,
+                                                              .fromSTEB(0.0,
+                                                              8.0, 0.0, 8.0),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                    12.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                            child: Icon(
+                                                              Icons.edit_square,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryText,
+                                                              size: 20.0,
+                                                            ),
+                                                          ),
+                                                          Expanded(
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                      12.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                              child: Text(
+                                                                'Edit message',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
+                                                  )
+                                                : const SizedBox(height: 0),
                                           ),
                                         ),
                                         Container(
@@ -546,41 +570,62 @@ class _FFChatWidgetState extends State<FFChatWidget> {
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryBackground,
                                           ),
-                                          child: Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .fromSTEB(0.0, 8.0, 0.0, 8.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(
-                                                          12.0, 0.0, 0.0, 0.0),
-                                                  child: Icon(
-                                                    Icons.content_copy_rounded,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText,
-                                                    size: 20.0,
-                                                  ),
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              Clipboard.setData(ClipboardData(
+                                                  text: message.text));
+                                              // Optionally, show a confirmation to the user, e.g., using a Snackbar
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                const SnackBar(
+                                                  duration:
+                                                      Duration(seconds: 1),
+                                                  content: Text(
+                                                      'Text copied to clipboard'),
                                                 ),
-                                                Expanded(
-                                                  child: Padding(
+                                              );
+                                              Navigator.pop(context);
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                      0.0, 8.0, 0.0, 8.0),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Padding(
                                                     padding:
                                                         const EdgeInsetsDirectional
                                                             .fromSTEB(12.0, 0.0,
                                                             0.0, 0.0),
-                                                    child: Text(
-                                                      'Copy text',
-                                                      style:
+                                                    child: Icon(
+                                                      Icons
+                                                          .content_copy_rounded,
+                                                      color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyMedium,
+                                                              .primaryText,
+                                                      size: 20.0,
                                                     ),
                                                   ),
-                                                ),
-                                              ],
+                                                  Expanded(
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(12.0,
+                                                              0.0, 0.0, 0.0),
+                                                      child: Text(
+                                                        'Copy text',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -791,7 +836,15 @@ class _FFChatWidgetState extends State<FFChatWidget> {
                   color: FlutterFlowTheme.of(context).primary,
                 ),
               )
-            // Center(
+          ],
+        ),
+      ),
+    );
+  }
+}
+  
+// CUSTOM_CODE_ENDED
+// Center(
             //   child: Padding(
             //     padding: const EdgeInsets.all(20),
             //     child: Column(
@@ -839,11 +892,3 @@ class _FFChatWidgetState extends State<FFChatWidget> {
             //     ),
             //   ),
             // ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-  
-// CUSTOM_CODE_ENDED
