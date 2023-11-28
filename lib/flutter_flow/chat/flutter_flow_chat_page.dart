@@ -81,6 +81,12 @@ class _FFChatPageState extends State<FFChatPage> {
     });
   }
 
+  void handleMessageDeleted(DocumentReference deletedMessageRef) {
+    setState(() {
+      messages.removeWhere((message) => message.reference == deletedMessageRef);
+    });
+  }
+
   void updateMessages(List<ChatMessagesRecord> chatMessages) {
     final oldLatestTime = latestMessageTime();
     chatMessages.forEach((m) => allMessages[m.reference.id] = m);
@@ -151,6 +157,7 @@ class _FFChatPageState extends State<FFChatPage> {
             otherUsers: otherUsersList,
             scrollController: scrollController,
             focusNode: focusNode,
+            onMessageDeleted: handleMessageDeleted,
             messages: messages
                 .map(
                   (message) => ChatMessage(
@@ -159,6 +166,9 @@ class _FFChatPageState extends State<FFChatPage> {
                         : otherUsers[message.user?.id]!,
                     text: message.text,
                     createdAt: message.timestamp!,
+                    customProperties: {
+                      'reference': message.reference, // Custom property
+                    },
                   ),
                 )
                 .toList(),
@@ -168,8 +178,10 @@ class _FFChatPageState extends State<FFChatPage> {
                 ? () async {
                     final selectedMedia =
                         await selectMediaWithSourceBottomSheet(
+                      pickerFontFamily: 'Inter',
                       context: context,
                       allowPhoto: true,
+                      allowVideo: true,
                     ).then((m) => m != null && m.isNotEmpty ? m.first : null);
                     if (selectedMedia == null ||
                         !validateFileFormat(

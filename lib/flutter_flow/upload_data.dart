@@ -58,78 +58,181 @@ Future<List<SelectedFile>?> selectMediaWithSourceBottomSheet({
   bool includeDimensions = false,
   bool includeBlurHash = false,
 }) async {
-  createUploadMediaListTile(String label, MediaSource mediaSource) => ListTile(
-            title: Text(
-              label,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.getFont(
-                pickerFontFamily,
-                color: textColor,
-                fontWeight: FontWeight.w600,
-                fontSize: 20,
-              ),
-            ),
-            tileColor: backgroundColor,
-            dense: false,
-            onTap: () => Navigator.pop(
-              context,
-              mediaSource,
-            ),
-          );
   final mediaSource = await showModalBottomSheet<MediaSource>(
       context: context,
-      backgroundColor: backgroundColor,
       builder: (context) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (!kIsWeb) ...[
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
-                child: ListTile(
-                  title: Text(
-                    'Choose Source',
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.getFont(
-                      pickerFontFamily,
-                      color: textColor.withOpacity(0.65),
-                      fontWeight: FontWeight.w500,
-                      fontSize: 20,
-                    ),
-                  ),
-                  tileColor: backgroundColor,
-                  dense: false,
+        return Container(
+          width: double.infinity,
+          height: 290.0,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(0.0),
+              bottomRight: Radius.circular(0.0),
+              topLeft: Radius.circular(10.0),
+              topRight: Radius.circular(10.0),
+            ),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              const SizedBox(
+                width: 78.0,
+                child: Divider(
+                  thickness: 3.0,
+                  color: Color(0x3557636C),
                 ),
               ),
-              const Divider(),
+              Padding(
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 24.0, 16.0, 0.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 5.0, 0.0),
+                            child: Icon(
+                              Icons.image_outlined,
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              size: 24.0,
+                            ),
+                          ),
+                          Expanded(
+                            child: Text(
+                              'Photos & Videos',
+                              style: FlutterFlowTheme.of(context).bodyMedium,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 15.0, 7.5),
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.pop(
+                                context,
+                                MediaSource.photoGallery,
+                              );
+                            },
+                            child: Text(
+                              'View photo library',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    color: const Color(0xFF51A781),
+                                  ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 15.0, 0.0),
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.pop(
+                                context,
+                                MediaSource.videoGallery,
+                              );
+                            },
+                            child: Text(
+                              'View video library',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    color: const Color(0xFF51A781),
+                                  ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(
+                    16.0, 20.0, 16.0, 20.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(
+                          context,
+                          MediaSource.camera,
+                        );
+                      },
+                      child: Container(
+                        width: 80.0,
+                        height: 80.0,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10.0),
+                          border: Border.all(
+                            color: const Color(0x2F14181B),
+                          ),
+                        ),
+                        child: Icon(
+                          Icons.camera_alt_outlined,
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                          size: 24.0,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Divider(
+                thickness: 1.0,
+                color: Color(0x1514181B),
+              ),
+              Align(
+                alignment: const AlignmentDirectional(-1.00, -1.00),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      16.0, 0.0, 16.0, 0.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            0.0, 0.0, 5.0, 0.0),
+                        child: Icon(
+                          Icons.link_outlined,
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                          size: 24.0,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pop(
+                            context,
+                            MediaSource.camera,
+                          );
+                        },
+                        child: Text(
+                          'Upload Files',
+                          style: FlutterFlowTheme.of(context).bodyMedium,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
-            if (allowPhoto && allowVideo) ...[
-              createUploadMediaListTile(
-                'Gallery (Photo)',
-                MediaSource.photoGallery,
-              ),
-              const Divider(),
-              createUploadMediaListTile(
-                'Gallery (Video)',
-                MediaSource.videoGallery,
-              ),
-            ] else if (allowPhoto)
-              createUploadMediaListTile(
-                'Gallery',
-                MediaSource.photoGallery,
-              )
-            else
-              createUploadMediaListTile(
-                'Gallery',
-                MediaSource.videoGallery,
-              ),
-            if (!kIsWeb) ...[
-              const Divider(),
-              createUploadMediaListTile('Camera', MediaSource.camera),
-              const Divider(),
-            ],
-            const SizedBox(height: 10),
-          ],
+          ),
         );
       });
   if (mediaSource == null) {
@@ -361,16 +464,17 @@ void showUploadMessage(
               Padding(
                 padding: const EdgeInsetsDirectional.only(end: 10.0),
                 child: CircularProgressIndicator(
-                  valueColor: Theme.of(context).brightness == Brightness.dark
+                  valueColor: Theme.of(context).brightness == Brightness.light
                       ? AlwaysStoppedAnimation<Color>(
-                          FlutterFlowTheme.of(context).accent4)
+                          FlutterFlowTheme.of(context).primary)
                       : null,
                 ),
               ),
             Text(message),
           ],
         ),
-        duration: showLoading ? const Duration(days: 1) : const Duration(seconds: 4),
+        duration:
+            showLoading ? const Duration(days: 1) : const Duration(seconds: 4),
       ),
     );
 }

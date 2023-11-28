@@ -149,8 +149,8 @@ class _NavBarPageState extends State<NavBarPage> {
       // CUSTOM_CODE_STARTED
       bottomNavigationBar: Container(
         color: FlutterFlowTheme.of(context).secondaryBackground,
-        padding: const EdgeInsets.only(bottom: 20),
-        height: 90,
+        padding: const EdgeInsets.only(bottom: 15),
+        height: 100,
         child: Column(
           children: [
             Divider(
