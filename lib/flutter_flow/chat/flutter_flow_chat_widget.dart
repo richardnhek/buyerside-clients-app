@@ -131,22 +131,35 @@ class FFChatWidget extends StatefulWidget {
 
 class _FFChatWidgetState extends State<FFChatWidget> {
   TextEditingController textEditingController = TextEditingController();
+  TextEditingController editTec = TextEditingController();
   Map<String, bool> messageHoverStates = {};
   ChatMessage? _editingMessage;
 
   @override
   void dispose() {
     textEditingController.dispose();
-
+    editTec.dispose();
     super.dispose();
   }
 
   void _initiateMessageEditing(ChatMessage message) {
     setState(() {
       _editingMessage = message;
-      textEditingController.text = message.text; //
+      editTec.text = _editingMessage!.text;
     });
     Navigator.pop(context); // Close the modal
+  }
+
+  Future<void> _handleMessageUpdate(
+      ChatMessage message, String newValue) async {
+    DocumentReference messageRef = message.customProperties?["reference"];
+    await messageRef.update(createChatMessagesRecordData(
+      text: newValue,
+    ));
+    // Reset the editing state
+    setState(() {
+      _editingMessage = null;
+    });
   }
 
   Future<void> _deleteMessage(DocumentReference chatMessageRef) async {
@@ -165,8 +178,23 @@ class _FFChatWidgetState extends State<FFChatWidget> {
   bool onMessageHover = false;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: widget.focusNode.unfocus,
+    return WillPopScope(
+      onWillPop: () async {
+        if (_editingMessage != null) {
+          // If a message is being edited, show the discard changes dialog
+          bool shouldDiscard = await _showDiscardChangesDialog();
+          if (shouldDiscard) {
+            setState(() {
+              _editingMessage = null;
+            });
+          } else {
+            // Optionally save changes here if needed
+            _handleMessageUpdate(_editingMessage!, editTec.text);
+          }
+          return shouldDiscard;
+        }
+        return true; // Allow pop if no message is being edited
+      },
       child: Container(
         color: Colors.white,
         child: Stack(
@@ -787,15 +815,54 @@ class _FFChatWidgetState extends State<FFChatWidget> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
-                                            Expanded(
-                                              child: Text(message.text,
-                                                  style: GoogleFonts.inter(
-                                                    fontSize: 14,
-                                                    height: 1.2,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: Colors.black,
-                                                  )),
-                                            ),
+                                            if (_editingMessage != null &&
+                                                _editingMessage == message)
+                                              Expanded(
+                                                child: Container(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(horizontal: 5),
+                                                  child: TextField(
+                                                    style: GoogleFonts.inter(
+                                                      color: Colors.black,
+                                                      fontSize: 14.0,
+                                                      height: 1.5,
+                                                    ),
+                                                    decoration: InputDecoration(
+                                                        suffixIcon: InkWell(
+                                                          onTap: () {
+                                                            _handleMessageUpdate(
+                                                                message,
+                                                                editTec.text);
+                                                          },
+                                                          child: const Icon(
+                                                            Icons.check,
+                                                            size: 24.0,
+                                                            color: Color(
+                                                                0xFF105035),
+                                                          ),
+                                                        ),
+                                                        border:
+                                                            InputBorder.none),
+                                                    controller: editTec,
+                                                    onSubmitted: (newValue) {
+                                                      _handleMessageUpdate(
+                                                          message, newValue);
+                                                    },
+                                                    autofocus: true,
+                                                  ),
+                                                ),
+                                              )
+                                            else
+                                              Expanded(
+                                                child: Text(message.text,
+                                                    style: GoogleFonts.inter(
+                                                      fontSize: 14,
+                                                      height: 1.2,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: Colors.black,
+                                                    )),
+                                              ),
                                             const SizedBox(width: 8),
                                             if (!shouldShowAvatar &&
                                                 messageHoverStates[message
@@ -841,7 +908,36 @@ class _FFChatWidgetState extends State<FFChatWidget> {
       ),
     );
   }
+
+  Future<bool> _showDiscardChangesDialog() async {
+    bool discard = await showDialog<bool>(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Discard Changes?'),
+              content: const Text('Do you want to discard your changes?'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(true),
+                  child: const Text('Discard'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    _handleMessageUpdate(_editingMessage!, editTec.text);
+                    Navigator.of(context).pop(false);
+                  },
+                  child: const Text('Save'),
+                ),
+              ],
+            );
+          },
+        ) ??
+        false;
+    return discard;
+  }
 }
+
+
   
 // CUSTOM_CODE_ENDED
 // Center(
