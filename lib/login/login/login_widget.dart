@@ -176,8 +176,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                         .phoneNumberFocusNode,
                                                     onFieldSubmitted:
                                                         (_) async {
-                                                      final phoneNumberVal =
-                                                          '+1${_model.phoneNumberController.text}';
+                                                      final phoneNumberVal = _model
+                                                          .phoneNumberController
+                                                          .text;
                                                       if (phoneNumberVal
                                                               .isEmpty ||
                                                           !phoneNumberVal
@@ -226,7 +227,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                                         .w600,
                                                               ),
                                                       hintText:
-                                                          '(204) 204-2056',
+                                                          '+1(204) 204-2056',
                                                       hintStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -336,7 +337,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                             child: FFButtonWidget(
                               onPressed: () async {
                                 final phoneNumberVal =
-                                    '+1${_model.phoneNumberController.text}';
+                                    _model.phoneNumberController.text;
                                 if (phoneNumberVal.isEmpty ||
                                     !phoneNumberVal.startsWith('+')) {
                                   ScaffoldMessenger.of(context).showSnackBar(
