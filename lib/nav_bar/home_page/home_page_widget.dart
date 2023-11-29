@@ -282,9 +282,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                           validateFileFormat(
                                                               m.storagePath,
                                                               context))) {
-                                                    setState(() =>
-                                                        _model.isDataUploading =
-                                                            true);
+                                                    setState(() => _model
+                                                            .isDataUploading1 =
+                                                        true);
                                                     var selectedUploadedFiles =
                                                         <FFUploadedFile>[];
 
@@ -335,7 +335,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                       ScaffoldMessenger.of(
                                                               context)
                                                           .hideCurrentSnackBar();
-                                                      _model.isDataUploading =
+                                                      _model.isDataUploading1 =
                                                           false;
                                                     }
                                                     if (selectedUploadedFiles
@@ -346,10 +346,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                             selectedMedia
                                                                 .length) {
                                                       setState(() {
-                                                        _model.uploadedLocalFile =
+                                                        _model.uploadedLocalFile1 =
                                                             selectedUploadedFiles
                                                                 .first;
-                                                        _model.uploadedFileUrl =
+                                                        _model.uploadedFileUrl1 =
                                                             downloadUrls.first;
                                                       });
                                                       showUploadMessage(
@@ -364,7 +364,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
                                                   setState(() {
                                                     _model.userProPic =
-                                                        _model.uploadedFileUrl;
+                                                        _model.uploadedFileUrl1;
                                                     _model.isChanged = true;
                                                   });
                                                 },
@@ -416,18 +416,19 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     _model.isChanged = true;
                                                   });
                                                   setState(() {
-                                                    _model.isDataUploading =
+                                                    _model.isDataUploading1 =
                                                         false;
-                                                    _model.uploadedLocalFile =
+                                                    _model.uploadedLocalFile1 =
                                                         FFUploadedFile(
                                                             bytes: Uint8List
                                                                 .fromList([]));
-                                                    _model.uploadedFileUrl = '';
+                                                    _model.uploadedFileUrl1 =
+                                                        '';
                                                   });
 
                                                   await FirebaseStorage.instance
                                                       .refFromURL(_model
-                                                          .uploadedFileUrl)
+                                                          .uploadedFileUrl1)
                                                       .delete();
                                                 },
                                                 child: Container(
@@ -550,6 +551,68 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 setState(() {
                                                   _model.isChanged = false;
                                                 });
+                                                final selectedFiles =
+                                                    await selectFiles(
+                                                  allowedExtensions: ['pdf'],
+                                                  multiFile: false,
+                                                );
+                                                if (selectedFiles != null) {
+                                                  setState(() => _model
+                                                      .isDataUploading2 = true);
+                                                  var selectedUploadedFiles =
+                                                      <FFUploadedFile>[];
+
+                                                  var downloadUrls = <String>[];
+                                                  try {
+                                                    selectedUploadedFiles =
+                                                        selectedFiles
+                                                            .map((m) =>
+                                                                FFUploadedFile(
+                                                                  name: m
+                                                                      .storagePath
+                                                                      .split(
+                                                                          '/')
+                                                                      .last,
+                                                                  bytes:
+                                                                      m.bytes,
+                                                                ))
+                                                            .toList();
+
+                                                    downloadUrls = (await Future
+                                                            .wait(
+                                                      selectedFiles.map(
+                                                        (f) async =>
+                                                            await uploadData(
+                                                                f.storagePath,
+                                                                f.bytes),
+                                                      ),
+                                                    ))
+                                                        .where((u) => u != null)
+                                                        .map((u) => u!)
+                                                        .toList();
+                                                  } finally {
+                                                    _model.isDataUploading2 =
+                                                        false;
+                                                  }
+                                                  if (selectedUploadedFiles
+                                                              .length ==
+                                                          selectedFiles
+                                                              .length &&
+                                                      downloadUrls.length ==
+                                                          selectedFiles
+                                                              .length) {
+                                                    setState(() {
+                                                      _model.uploadedLocalFile2 =
+                                                          selectedUploadedFiles
+                                                              .first;
+                                                      _model.uploadedFileUrl2 =
+                                                          downloadUrls.first;
+                                                    });
+                                                  } else {
+                                                    setState(() {});
+                                                    return;
+                                                  }
+                                                }
                                               },
                                         text: 'Save Changes',
                                         options: FFButtonOptions(
