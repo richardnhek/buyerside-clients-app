@@ -466,12 +466,27 @@ class _AllServicesWidgetState extends State<AllServicesWidget> {
                                                         const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
                                                                 5.0, 0.0),
-                                                    child: Icon(
-                                                      Icons.arrow_circle_right,
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .primaryBackground,
-                                                      size: 24.0,
+                                                    child: InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        context.pushNamed(
+                                                            'OrderInspection');
+                                                      },
+                                                      child: Icon(
+                                                        Icons
+                                                            .arrow_circle_right,
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .primaryBackground,
+                                                        size: 24.0,
+                                                      ),
                                                     ),
                                                   ),
                                                 ],

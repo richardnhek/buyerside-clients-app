@@ -10,7 +10,7 @@ class LoginModel extends FlutterFlowModel<LoginWidget> {
   // State field(s) for phoneNumber widget.
   FocusNode? phoneNumberFocusNode;
   TextEditingController? phoneNumberController;
-  final phoneNumberMask = MaskTextInputFormatter(mask: '(###) ###-####');
+  final phoneNumberMask = MaskTextInputFormatter(mask: '+# (###) ###-##-##');
   String? Function(BuildContext, String?)? phoneNumberControllerValidator;
 
   /// Initialization and disposal methods.

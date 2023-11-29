@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -441,8 +442,35 @@ class _OrderInspectionWidgetState extends State<OrderInspectionWidget> {
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 50.0),
                 child: FFButtonWidget(
-                  onPressed: () {
-                    print('Button pressed ...');
+                  onPressed: () async {
+                    await MailRecord.collection.doc().set(createMailRecordData(
+                          to: 'nhekpichpanharith@gmail.com',
+                          message: createMailMessageStruct(
+                            subject: 'Order Request from the Client',
+                            html: (String addressVal, String contactVal,
+                                    String requestedVal) {
+                              return "Address: $addressVal<br>Contact: $contactVal<br>Requested by: $requestedVal";
+                            }(
+                                _model.textController1.text,
+                                _model.textController2.text,
+                                _model.textController3.text),
+                            clearUnsetFields: false,
+                            create: true,
+                          ),
+                        ));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          'Order has been submitted',
+                          style: TextStyle(
+                            color: FlutterFlowTheme.of(context).primaryText,
+                          ),
+                        ),
+                        duration: const Duration(milliseconds: 4000),
+                        backgroundColor: FlutterFlowTheme.of(context).secondary,
+                      ),
+                    );
+                    Navigator.pop(context);
                   },
                   text: 'Order',
                   options: FFButtonOptions(
