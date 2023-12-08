@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'home_page_widget.dart' show HomePageWidget;
+import 'profile_page_widget.dart' show ProfilePageWidget;
 import 'package:flutter/material.dart';
 
-class HomePageModel extends FlutterFlowModel<HomePageWidget> {
+class ProfilePageModel extends FlutterFlowModel<ProfilePageWidget> {
   ///  Local state fields for this page.
 
   bool isChanged = false;

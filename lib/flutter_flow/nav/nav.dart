@@ -85,11 +85,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               appStateNotifier.loggedIn ? const NavBarPage() : const OnboardWidget(),
         ),
         FFRoute(
-          name: 'HomePage',
-          path: '/homePage',
+          name: 'ProfilePage',
+          path: '/profilePage',
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'HomePage')
-              : const HomePageWidget(),
+              ? const NavBarPage(initialPage: 'ProfilePage')
+              : const ProfilePageWidget(),
         ),
         FFRoute(
           name: 'Onboard',
@@ -104,7 +104,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'VerificationPage',
           path: '/verificationPage',
-          builder: (context, params) => const VerificationPageWidget(),
+          builder: (context, params) => VerificationPageWidget(
+            phoneNumber: params.getParam('phoneNumber', ParamType.String),
+          ),
         ),
         FFRoute(
           name: 'ChatBox',
@@ -199,6 +201,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'StartNewChat',
           path: '/startNewChat',
           builder: (context, params) => const StartNewChatWidget(),
+        ),
+        FFRoute(
+          name: 'Team',
+          path: '/team',
+          builder: (context, params) => const TeamWidget(),
+        ),
+        FFRoute(
+          name: 'Home',
+          path: '/home',
+          requireAuth: true,
+          builder: (context, params) =>
+              params.isEmpty ? const NavBarPage(initialPage: 'Home') : const HomeWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

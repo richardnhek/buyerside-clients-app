@@ -62,12 +62,13 @@ class _OnboardWidgetState extends State<OnboardWidget> {
                 alignment: const AlignmentDirectional(-1.00, -1.00),
                 child: Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
-                  child: Text(
-                    'logo here',
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
-                          fontSize: 17.0,
-                        ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(0.0),
+                    child: Image.asset(
+                      'assets/images/logo.png',
+                      height: 35.0,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
@@ -118,7 +119,7 @@ class _OnboardWidgetState extends State<OnboardWidget> {
                               ),
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 40.0, 0.0, 0.0),
+                                    0.0, 30.0, 0.0, 0.0),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(0.0),
                                   child: Image.asset(

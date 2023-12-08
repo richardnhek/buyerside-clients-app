@@ -1,8 +1,10 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +12,12 @@ import 'verification_page_model.dart';
 export 'verification_page_model.dart';
 
 class VerificationPageWidget extends StatefulWidget {
-  const VerificationPageWidget({super.key});
+  const VerificationPageWidget({
+    super.key,
+    required this.phoneNumber,
+  });
+
+  final String? phoneNumber;
 
   @override
   _VerificationPageWidgetState createState() => _VerificationPageWidgetState();
@@ -25,6 +32,9 @@ class _VerificationPageWidgetState extends State<VerificationPageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => VerificationPageModel());
+
+    authManager.handlePhoneAuthStateChanges(context);
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -67,12 +77,13 @@ class _VerificationPageWidgetState extends State<VerificationPageWidget> {
                   child: Padding(
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
-                    child: Text(
-                      'logo here',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Inter',
-                            fontSize: 17.0,
-                          ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(0.0),
+                      child: Image.asset(
+                        'assets/images/logo.png',
+                        height: 35.0,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),
@@ -151,7 +162,7 @@ class _VerificationPageWidgetState extends State<VerificationPageWidget> {
                                   cursorColor:
                                       FlutterFlowTheme.of(context).primary,
                                   obscureText: false,
-                                  hintCharacter: '-',
+                                  hintCharacter: '*',
                                   keyboardType: TextInputType.number,
                                   pinTheme: PinTheme(
                                     fieldHeight: 50.0,
@@ -179,6 +190,134 @@ class _VerificationPageWidgetState extends State<VerificationPageWidget> {
                                       AutovalidateMode.onUserInteraction,
                                   validator: _model.pinCodeControllerValidator
                                       .asValidator(context),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 20.0, 0.0, 0.0),
+                                child: Builder(
+                                  builder: (context) {
+                                    if (_model.isSent == false) {
+                                      return InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          setState(() {
+                                            _model.isSent = true;
+                                          });
+                                          _model.timerController.onStartTimer();
+                                          final phoneNumberVal =
+                                              '+${widget.phoneNumber}';
+                                          if (phoneNumberVal.isEmpty ||
+                                              !phoneNumberVal.startsWith('+')) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              const SnackBar(
+                                                content: Text(
+                                                    'Phone Number is required and has to start with +.'),
+                                              ),
+                                            );
+                                            return;
+                                          }
+                                          await authManager.beginPhoneAuth(
+                                            context: context,
+                                            phoneNumber: phoneNumberVal,
+                                            onCodeSent: (context) async {
+                                              context.goNamedAuth(
+                                                'VerificationPage',
+                                                context.mounted,
+                                                queryParameters: {
+                                                  'phoneNumber': serializeParam(
+                                                    widget.phoneNumber,
+                                                    ParamType.String,
+                                                  ),
+                                                }.withoutNulls,
+                                                ignoreRedirect: true,
+                                              );
+                                            },
+                                          );
+                                        },
+                                        child: Text(
+                                          'Resend Code',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                fontSize: 12.0,
+                                                fontWeight: FontWeight.w500,
+                                                decoration:
+                                                    TextDecoration.underline,
+                                              ),
+                                        ),
+                                      );
+                                    } else {
+                                      return Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          FlutterFlowTimer(
+                                            initialTime:
+                                                _model.timerMilliseconds,
+                                            getDisplayTime: (value) =>
+                                                StopWatchTimer.getDisplayTime(
+                                              value,
+                                              hours: false,
+                                              milliSecond: false,
+                                            ),
+                                            controller: _model.timerController,
+                                            updateStateInterval:
+                                                const Duration(milliseconds: 1000),
+                                            onChanged: (value, displayTime,
+                                                shouldUpdate) {
+                                              _model.timerMilliseconds = value;
+                                              _model.timerValue = displayTime;
+                                              if (shouldUpdate) setState(() {});
+                                            },
+                                            onEnded: () async {
+                                              setState(() {
+                                                _model.isSent = false;
+                                              });
+                                              _model.timerController
+                                                  .onResetTimer();
+                                            },
+                                            textAlign: TextAlign.start,
+                                            style: FlutterFlowTheme.of(context)
+                                                .headlineSmall
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  fontSize: 12.0,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    1.0, 0.0, 0.0, 0.0),
+                                            child: Text(
+                                              's',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Inter',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
+                                                    fontSize: 12.0,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    }
+                                  },
                                 ),
                               ),
                             ],
