@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'order_inspection_model.dart';
 export 'order_inspection_model.dart';
@@ -440,40 +439,80 @@ class _OrderInspectionWidgetState extends State<OrderInspectionWidget> {
                             const EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            await MailRecord.collection
-                                .doc()
-                                .set(createMailRecordData(
-                                  to: 'alex.brownbill@gmail.com',
-                                  message: createMailMessageStruct(
-                                    subject: 'Order Request from the Client',
-                                    html: (String addressVal, String contactVal,
-                                            String requestedVal) {
-                                      return "Address: $addressVal<br>Contact: $contactVal<br>Requested by: $requestedVal";
-                                    }(
-                                        _model.textController1.text,
-                                        _model.textController2.text,
-                                        _model.textController3.text),
-                                    clearUnsetFields: false,
-                                    create: true,
+                            if ((_model.textController1.text == '') ||
+                                (_model.textController2.text == '') ||
+                                (_model.textController3.text == '')) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Data is missing, Please fill in all the information.',
+                                    style: TextStyle(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                    ),
                                   ),
-                                ));
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'Order has been submitted',
-                                  style: GoogleFonts.getFont(
-                                    'Inter',
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                  ),
+                                  duration: const Duration(milliseconds: 4000),
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).secondary,
                                 ),
-                                duration: const Duration(milliseconds: 4000),
-                                backgroundColor:
-                                    FlutterFlowTheme.of(context).secondary,
-                              ),
-                            );
-                            Navigator.pop(context);
-                            context.safePop();
+                              );
+                            } else {
+                              var mailRecordReference =
+                                  MailRecord.collection.doc();
+                              await mailRecordReference
+                                  .set(createMailRecordData(
+                                to: 'alex.brownbill@gmail.com',
+                                message: createMailMessageStruct(
+                                  subject: 'Order Request from the Client',
+                                  html: (String addressVal, String contactVal,
+                                          String requestedVal) {
+                                    return "Address: $addressVal<br>Contact: $contactVal<br>Requested by: $requestedVal";
+                                  }(
+                                      _model.textController1.text,
+                                      _model.textController2.text,
+                                      _model.textController3.text),
+                                  clearUnsetFields: false,
+                                  create: true,
+                                ),
+                              ));
+                              _model.outputCreateDocMail =
+                                  MailRecord.getDocumentFromData(
+                                      createMailRecordData(
+                                        to: 'alex.brownbill@gmail.com',
+                                        message: createMailMessageStruct(
+                                          subject:
+                                              'Order Request from the Client',
+                                          html: (String addressVal,
+                                                  String contactVal,
+                                                  String requestedVal) {
+                                            return "Address: $addressVal<br>Contact: $contactVal<br>Requested by: $requestedVal";
+                                          }(
+                                              _model.textController1.text,
+                                              _model.textController2.text,
+                                              _model.textController3.text),
+                                          clearUnsetFields: false,
+                                          create: true,
+                                        ),
+                                      ),
+                                      mailRecordReference);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Order has been submitted',
+                                    style: TextStyle(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                    ),
+                                  ),
+                                  duration: const Duration(milliseconds: 4000),
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).secondary,
+                                ),
+                              );
+                              Navigator.pop(context);
+                            }
+
+                            setState(() {});
                           },
                           text: 'Order',
                           options: FFButtonOptions(
