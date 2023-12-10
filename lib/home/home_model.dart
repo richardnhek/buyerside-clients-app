@@ -1,11 +1,11 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'user_profile_widget.dart' show UserProfileWidget;
+import 'home_widget.dart' show HomeWidget;
 import 'package:flutter/material.dart';
 
-class UserProfileModel extends FlutterFlowModel<UserProfileWidget> {
+class HomeModel extends FlutterFlowModel<HomeWidget> {
   ///  Local state fields for this page.
 
-  bool? isPinned;
+  String selectedSite = 'https://www.realestate.com.au/';
 
   ///  State fields for stateful widgets in this page.
 

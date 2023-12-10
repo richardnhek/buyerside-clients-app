@@ -108,10 +108,14 @@ class ParameterData {
 
 final parametersBuilderMap =
     <String, Future<ParameterData> Function(Map<String, dynamic>)>{
-  'HomePage': ParameterData.none(),
+  'ProfilePage': ParameterData.none(),
   'Onboard': ParameterData.none(),
   'Login': ParameterData.none(),
-  'VerificationPage': ParameterData.none(),
+  'VerificationPage': (data) async => ParameterData(
+        allParams: {
+          'phoneNumber': getParameter<String>(data, 'phoneNumber'),
+        },
+      ),
   'ChatBox': (data) async => ParameterData(
         allParams: {
           'chatUser': await getDocumentParameter<UsersRecord>(
@@ -154,6 +158,8 @@ final parametersBuilderMap =
         },
       ),
   'StartNewChat': ParameterData.none(),
+  'Team': ParameterData.none(),
+  'Home': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

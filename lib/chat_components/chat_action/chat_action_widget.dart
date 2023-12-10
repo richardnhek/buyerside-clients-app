@@ -1,5 +1,7 @@
+import '/backend/firebase_storage/storage.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'chat_action_model.dart';
@@ -124,22 +126,69 @@ class _ChatActionWidgetState extends State<ChatActionWidget> {
             alignment: const AlignmentDirectional(-1.00, -1.00),
             child: Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
-                    child: Icon(
-                      Icons.link_outlined,
-                      color: FlutterFlowTheme.of(context).secondaryText,
-                      size: 24.0,
+              child: InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  final selectedFiles = await selectFiles(
+                    multiFile: false,
+                  );
+                  if (selectedFiles != null) {
+                    setState(() => _model.isDataUploading = true);
+                    var selectedUploadedFiles = <FFUploadedFile>[];
+
+                    var downloadUrls = <String>[];
+                    try {
+                      selectedUploadedFiles = selectedFiles
+                          .map((m) => FFUploadedFile(
+                                name: m.storagePath.split('/').last,
+                                bytes: m.bytes,
+                              ))
+                          .toList();
+
+                      downloadUrls = (await Future.wait(
+                        selectedFiles.map(
+                          (f) async => await uploadData(f.storagePath, f.bytes),
+                        ),
+                      ))
+                          .where((u) => u != null)
+                          .map((u) => u!)
+                          .toList();
+                    } finally {
+                      _model.isDataUploading = false;
+                    }
+                    if (selectedUploadedFiles.length == selectedFiles.length &&
+                        downloadUrls.length == selectedFiles.length) {
+                      setState(() {
+                        _model.uploadedLocalFile = selectedUploadedFiles.first;
+                        _model.uploadedFileUrl = downloadUrls.first;
+                      });
+                    } else {
+                      setState(() {});
+                      return;
+                    }
+                  }
+                },
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                      child: Icon(
+                        Icons.link_outlined,
+                        color: FlutterFlowTheme.of(context).secondaryText,
+                        size: 24.0,
+                      ),
                     ),
-                  ),
-                  Text(
-                    'Upload Files',
-                    style: FlutterFlowTheme.of(context).bodyMedium,
-                  ),
-                ],
+                    Text(
+                      'Upload Files',
+                      style: FlutterFlowTheme.of(context).bodyMedium,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

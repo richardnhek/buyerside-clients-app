@@ -75,6 +75,16 @@ class ChatsRecord extends FirestoreRecord {
   DocumentReference? get chatRef => _chatRef;
   bool hasChatRef() => _chatRef != null;
 
+  // "pinnedBy" field.
+  List<DocumentReference>? _pinnedBy;
+  List<DocumentReference> get pinnedBy => _pinnedBy ?? const [];
+  bool hasPinnedBy() => _pinnedBy != null;
+
+  // "archivedBy" field.
+  List<DocumentReference>? _archivedBy;
+  List<DocumentReference> get archivedBy => _archivedBy ?? const [];
+  bool hasArchivedBy() => _archivedBy != null;
+
   void _initializeFields() {
     _users = getDataList(snapshotData['users']);
     _userA = snapshotData['user_a'] as DocumentReference?;
@@ -89,6 +99,8 @@ class ChatsRecord extends FirestoreRecord {
     _channelName = snapshotData['channel_name'] as String?;
     _workspaceRef = snapshotData['workspace_ref'] as DocumentReference?;
     _chatRef = snapshotData['chat_ref'] as DocumentReference?;
+    _pinnedBy = getDataList(snapshotData['pinnedBy']);
+    _archivedBy = getDataList(snapshotData['archivedBy']);
   }
 
   static CollectionReference get collection =>
@@ -171,7 +183,9 @@ class ChatsRecordDocumentEquality implements Equality<ChatsRecord> {
         e1?.workspaceId == e2?.workspaceId &&
         e1?.channelName == e2?.channelName &&
         e1?.workspaceRef == e2?.workspaceRef &&
-        e1?.chatRef == e2?.chatRef;
+        e1?.chatRef == e2?.chatRef &&
+        listEquality.equals(e1?.pinnedBy, e2?.pinnedBy) &&
+        listEquality.equals(e1?.archivedBy, e2?.archivedBy);
   }
 
   @override
@@ -187,7 +201,9 @@ class ChatsRecordDocumentEquality implements Equality<ChatsRecord> {
         e?.workspaceId,
         e?.channelName,
         e?.workspaceRef,
-        e?.chatRef
+        e?.chatRef,
+        e?.pinnedBy,
+        e?.archivedBy
       ]);
 
   @override

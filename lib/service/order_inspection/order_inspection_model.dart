@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'order_inspection_widget.dart' show OrderInspectionWidget;
 import 'package:flutter/material.dart';
@@ -18,6 +19,8 @@ class OrderInspectionModel extends FlutterFlowModel<OrderInspectionWidget> {
   FocusNode? textFieldFocusNode3;
   TextEditingController? textController3;
   String? Function(BuildContext, String?)? textController3Validator;
+  // Stores action output result for [Backend Call - Create Document] action in Button widget.
+  MailRecord? outputCreateDocMail;
 
   /// Initialization and disposal methods.
 

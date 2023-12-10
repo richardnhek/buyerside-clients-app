@@ -245,7 +245,8 @@ class _FFChatWidgetState extends State<FFChatWidget> {
                       List<ChatUser> mentionSuggestions = widget.otherUsers
                           .where((user) => user.firstName!
                               .toLowerCase()
-                              .contains(value.toLowerCase()))
+                              .startsWith(value
+                                  .toLowerCase())) // Changed from .contains to .startsWith
                           .toList();
 
                       // Check if suggestions are found

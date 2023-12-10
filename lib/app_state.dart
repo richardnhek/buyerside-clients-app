@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/backend/backend.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 
 class FFAppState extends ChangeNotifier {
@@ -15,12 +15,20 @@ class FFAppState extends ChangeNotifier {
     _instance = FFAppState._internal();
   }
 
-  Future initializePersistedState() async {}
+  Future initializePersistedState() async {
+    prefs = await SharedPreferences.getInstance();
+    _safeInit(() {
+      _pinnedChatRef =
+          prefs.getString('ff_pinnedChatRef')?.ref ?? _pinnedChatRef;
+    });
+  }
 
   void update(VoidCallback callback) {
     callback();
     notifyListeners();
   }
+
+  late SharedPreferences prefs;
 
   DocumentReference? _currentChatRef;
   DocumentReference? get currentChatRef => _currentChatRef;
@@ -50,6 +58,15 @@ class FFAppState extends ChangeNotifier {
   String get mainNavView => _mainNavView;
   set mainNavView(String value) {
     _mainNavView = value;
+  }
+
+  DocumentReference? _pinnedChatRef;
+  DocumentReference? get pinnedChatRef => _pinnedChatRef;
+  set pinnedChatRef(DocumentReference? value) {
+    _pinnedChatRef = value;
+    value != null
+        ? prefs.setString('ff_pinnedChatRef', value.path)
+        : prefs.remove('ff_pinnedChatRef');
   }
 }
 

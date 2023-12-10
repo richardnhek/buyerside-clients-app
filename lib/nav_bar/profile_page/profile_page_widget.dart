@@ -14,26 +14,25 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'profile_page_model.dart';
+export 'profile_page_model.dart';
 
-import 'home_page_model.dart';
-export 'home_page_model.dart';
-
-class HomePageWidget extends StatefulWidget {
-  const HomePageWidget({Key? key}) : super(key: key);
+class ProfilePageWidget extends StatefulWidget {
+  const ProfilePageWidget({super.key});
 
   @override
-  _HomePageWidgetState createState() => _HomePageWidgetState();
+  _ProfilePageWidgetState createState() => _ProfilePageWidgetState();
 }
 
-class _HomePageWidgetState extends State<HomePageWidget> {
-  late HomePageModel _model;
+class _ProfilePageWidgetState extends State<ProfilePageWidget> {
+  late ProfilePageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => HomePageModel());
+    _model = createModel(context, () => ProfilePageModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -96,7 +95,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     child: Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(20, 0, 0, 15),
                       child: Text(
-                        'Home',
+                        'Profile',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Inter',
                               fontSize: 17,
@@ -893,24 +892,30 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               context.goNamedAuth('Onboard', context.mounted);
                             },
                             text: 'Logout',
+                            icon: const Icon(
+                              FFIcons.klogout,
+                              size: 16.0,
+                            ),
                             options: FFButtonOptions(
-                              width: double.infinity,
+                              width: 140.0,
                               height: 50.0,
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
-                              color: const Color(0xFFFF4952),
+                              color: Colors.transparent,
                               textStyle: FlutterFlowTheme.of(context)
                                   .titleSmall
                                   .override(
                                     fontFamily: 'Inter',
-                                    color: Colors.white,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontWeight: FontWeight.w500,
                                   ),
                               elevation: 0.0,
-                              borderSide: const BorderSide(
-                                color: Colors.transparent,
-                                width: 0.0,
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primary,
+                                width: 1.5,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
                             ),
