@@ -44,6 +44,7 @@ enum MediaSource {
   camera,
 }
 
+// CUSTOM_CODE_STARTED
 Future<List<SelectedFile>?> selectMediaWithSourceBottomSheet({
   required BuildContext context,
   String? storageFolderPath,
@@ -484,3 +485,4 @@ String? _removeTrailingSlash(String? path) => path != null && path.endsWith('/')
     : path;
 
 String _firebasePathPrefix() => 'users/$currentUserUid/uploads';
+// CUSTOM_CODE_ENDED

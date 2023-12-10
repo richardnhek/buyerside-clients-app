@@ -518,11 +518,11 @@ class _FFChatWidgetState extends State<FFChatWidget> {
                                                                     0.0,
                                                                     0.0),
                                                             child: Icon(
-                                                              Icons.edit_square,
+                                                              FFIcons.kicon13,
                                                               color: FlutterFlowTheme
                                                                       .of(context)
                                                                   .primaryText,
-                                                              size: 20.0,
+                                                              size: 16.0,
                                                             ),
                                                           ),
                                                           Expanded(
@@ -567,11 +567,11 @@ class _FFChatWidgetState extends State<FFChatWidget> {
                                                           .fromSTEB(
                                                           12.0, 0.0, 0.0, 0.0),
                                                   child: Icon(
-                                                    Icons.send_outlined,
+                                                    FFIcons.kicon15,
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .primaryText,
-                                                    size: 20.0,
+                                                    size: 16.0,
                                                   ),
                                                 ),
                                                 Expanded(
@@ -629,13 +629,12 @@ class _FFChatWidgetState extends State<FFChatWidget> {
                                                             .fromSTEB(12.0, 0.0,
                                                             0.0, 0.0),
                                                     child: Icon(
-                                                      Icons
-                                                          .content_copy_rounded,
+                                                      FFIcons.kicon16,
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .primaryText,
-                                                      size: 20.0,
+                                                      size: 16.0,
                                                     ),
                                                   ),
                                                   Expanded(
@@ -671,44 +670,41 @@ class _FFChatWidgetState extends State<FFChatWidget> {
                                                       const EdgeInsetsDirectional
                                                           .fromSTEB(
                                                           0.0, 8.0, 0.0, 8.0),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
-                                                      const Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
+                                                  child: GestureDetector(
+                                                    onTap: () async {
+                                                      await _deleteMessage(message
+                                                              .customProperties?[
+                                                          'reference']);
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        const Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      12.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          child: Icon(
+                                                            FFIcons.kicon17,
+                                                            color: Color(
+                                                                0xFFFF0000),
+                                                            size: 16.0,
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsetsDirectional
+                                                                    .fromSTEB(
                                                                     12.0,
                                                                     0.0,
                                                                     0.0,
                                                                     0.0),
-                                                        child: Icon(
-                                                          Icons
-                                                              .delete_outline_rounded,
-                                                          color:
-                                                              Color(0xFFFF0000),
-                                                          size: 20.0,
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                  12.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                          child:
-                                                              GestureDetector(
-                                                            onTap: () async {
-                                                              await _deleteMessage(
-                                                                  message.customProperties?[
-                                                                      'reference']);
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
                                                             child: Text(
                                                               'Delete message',
                                                               style: FlutterFlowTheme
@@ -723,8 +719,8 @@ class _FFChatWidgetState extends State<FFChatWidget> {
                                                             ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
                                                   ),
                                                 )
                                               : const SizedBox(height: 0),
@@ -829,18 +825,44 @@ class _FFChatWidgetState extends State<FFChatWidget> {
                                                       height: 1.5,
                                                     ),
                                                     decoration: InputDecoration(
-                                                        suffixIcon: InkWell(
-                                                          onTap: () {
-                                                            _handleMessageUpdate(
-                                                                message,
-                                                                editTec.text);
-                                                          },
-                                                          child: const Icon(
-                                                            Icons.check,
-                                                            size: 24.0,
-                                                            color: Color(
-                                                                0xFF105035),
-                                                          ),
+                                                        suffixIcon: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          children: [
+                                                            InkWell(
+                                                              onTap: () {
+                                                                _handleMessageUpdate(
+                                                                  message,
+                                                                  editTec.text,
+                                                                );
+                                                              },
+                                                              child: const Icon(
+                                                                Icons.check,
+                                                                size: 24.0,
+                                                                color: Color(
+                                                                    0xFF105035),
+                                                              ),
+                                                            ),
+                                                            const SizedBox(
+                                                                width: 10),
+                                                            InkWell(
+                                                              onTap: () {
+                                                                setState(() {
+                                                                  editTec.text =
+                                                                      _editingMessage!
+                                                                          .text;
+                                                                  _editingMessage =
+                                                                      null;
+                                                                });
+                                                              },
+                                                              child: const Icon(
+                                                                Icons.close,
+                                                                size: 24.0,
+                                                                color: Color(
+                                                                    0xFFD32F2F),
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
                                                         border:
                                                             InputBorder.none),

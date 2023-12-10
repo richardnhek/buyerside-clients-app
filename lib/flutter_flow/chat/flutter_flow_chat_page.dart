@@ -82,8 +82,16 @@ class _FFChatPageState extends State<FFChatPage> {
   }
 
   void handleMessageDeleted(DocumentReference deletedMessageRef) {
+    // setState(() {
+    //   messages.removeWhere((message) => message.reference == deletedMessageRef);
+    // });
     setState(() {
-      messages.removeWhere((message) => message.reference == deletedMessageRef);
+      // Remove the message from the allMessages map
+      allMessages.remove(deletedMessageRef.id);
+
+      // Rebuild the messages list from the updated allMessages map
+      messages = allMessages.values.toList();
+      messages.sort((a, b) => a.timestamp!.compareTo(b.timestamp!));
     });
   }
 
