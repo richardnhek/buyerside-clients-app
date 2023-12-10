@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -105,7 +106,7 @@ class _AddUserToChatWidgetState extends State<AddUserToChatWidget> {
                 size: 25.0,
               ),
               onPressed: () async {
-                context.pop();
+                context.safePop();
               },
             ),
           ),
@@ -369,6 +370,37 @@ class _AddUserToChatWidgetState extends State<AddUserToChatWidget> {
                                     .map((e) => e.reference)
                                     .toList(),
                               );
+
+                              var chatMessagesRecordReference =
+                                  ChatMessagesRecord.collection.doc();
+                              await chatMessagesRecordReference
+                                  .set(createChatMessagesRecordData(
+                                user: currentUserReference,
+                                chat: widget.chatRef,
+                                text: functions.createWelcomeMessage(_model
+                                    .addedUserDocList!
+                                    .map((e) => e.displayName)
+                                    .toList()),
+                                timestamp: getCurrentTimestamp,
+                              ));
+                              _model.createdChatDoc =
+                                  ChatMessagesRecord.getDocumentFromData(
+                                      createChatMessagesRecordData(
+                                        user: currentUserReference,
+                                        chat: widget.chatRef,
+                                        text: functions.createWelcomeMessage(
+                                            _model.addedUserDocList!
+                                                .map((e) => e.displayName)
+                                                .toList()),
+                                        timestamp: getCurrentTimestamp,
+                                      ),
+                                      chatMessagesRecordReference);
+
+                              await _model.createdChatDoc!.reference
+                                  .update(createChatMessagesRecordData(
+                                chatMessageRef:
+                                    _model.createdChatDoc?.reference,
+                              ));
                               context.safePop();
 
                               setState(() {});

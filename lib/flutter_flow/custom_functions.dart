@@ -57,3 +57,17 @@ List<DocumentReference>? getListOfUnrelatedUsers(
   // Return the list of users who are in the same workspace but have not started a chat with the current user
   return unrelatedUsers;
 }
+
+String? createWelcomeMessage(List<String> userNames) {
+  if (userNames.isEmpty) {
+    return "No users have been added to the channel.";
+  } else if (userNames.length == 1) {
+    return "${userNames.first} has been added to the channel. Let's give a warm welcome to ${userNames.first}!";
+  } else if (userNames.length == 2) {
+    return "${userNames.join(' and ')} have been added to the channel. Let's give them a warm welcome!";
+  } else {
+    String allButLast = userNames.sublist(0, userNames.length - 1).join(", ");
+    String last = userNames.last;
+    return "$allButLast, and $last have been added to the channel. Let's give them a warm welcome!";
+  }
+}

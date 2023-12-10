@@ -4,6 +4,7 @@ import '/components/file_viewer_component_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:flutter/material.dart';
@@ -80,7 +81,7 @@ class _MembersDetailWidgetState extends State<MembersDetailWidget> {
                 size: 25.0,
               ),
               onPressed: () async {
-                context.pop();
+                context.safePop();
               },
             ),
           ),
@@ -251,7 +252,9 @@ class _MembersDetailWidgetState extends State<MembersDetailWidget> {
                         ),
                         Builder(
                           builder: (context) {
-                            if (widget.chatRef != FFAppState().pinnedChatRef) {
+                            if ((widget.chatRef !=
+                                    FFAppState().pinnedChatRef) &&
+                                (_model.isProcessing == false)) {
                               return InkWell(
                                 splashColor: Colors.transparent,
                                 focusColor: Colors.transparent,
@@ -259,6 +262,10 @@ class _MembersDetailWidgetState extends State<MembersDetailWidget> {
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
                                   if (FFAppState().pinnedChatRef == null) {
+                                    setState(() {
+                                      _model.isProcessing = true;
+                                    });
+
                                     await widget.chatRef!.update({
                                       ...mapToFirestore(
                                         {
@@ -267,9 +274,12 @@ class _MembersDetailWidgetState extends State<MembersDetailWidget> {
                                         },
                                       ),
                                     });
-                                    setState(() {
+                                    FFAppState().update(() {
                                       FFAppState().pinnedChatRef =
                                           widget.chatRef;
+                                    });
+                                    setState(() {
+                                      _model.isProcessing = false;
                                     });
                                   } else {
                                     ScaffoldMessenger.of(context)
@@ -287,7 +297,9 @@ class _MembersDetailWidgetState extends State<MembersDetailWidget> {
                                           ),
                                         ),
                                         duration: const Duration(milliseconds: 2000),
-                                        backgroundColor: const Color(0x99000000),
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .secondaryText,
                                       ),
                                     );
                                   }
@@ -349,13 +361,19 @@ class _MembersDetailWidgetState extends State<MembersDetailWidget> {
                                   ),
                                 ),
                               );
-                            } else {
+                            } else if ((widget.chatRef ==
+                                    FFAppState().pinnedChatRef) &&
+                                (_model.isProcessing == false)) {
                               return InkWell(
                                 splashColor: Colors.transparent,
                                 focusColor: Colors.transparent,
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
+                                  setState(() {
+                                    _model.isProcessing = true;
+                                  });
+
                                   await widget.chatRef!.update({
                                     ...mapToFirestore(
                                       {
@@ -364,8 +382,11 @@ class _MembersDetailWidgetState extends State<MembersDetailWidget> {
                                       },
                                     ),
                                   });
-                                  setState(() {
+                                  FFAppState().update(() {
                                     FFAppState().pinnedChatRef = null;
+                                  });
+                                  setState(() {
+                                    _model.isProcessing = false;
                                   });
                                 },
                                 child: Material(
@@ -428,6 +449,30 @@ class _MembersDetailWidgetState extends State<MembersDetailWidget> {
                                   ),
                                 ),
                               );
+                            } else {
+                              return Container(
+                                width: 110.0,
+                                height: 70.0,
+                                decoration: const BoxDecoration(
+                                  color: Colors.transparent,
+                                ),
+                                child: Align(
+                                  alignment: const AlignmentDirectional(0.00, 0.00),
+                                  child: SizedBox(
+                                    width: 50.0,
+                                    height: 50.0,
+                                    child: custom_widgets.FFlowSpinner(
+                                      width: 50.0,
+                                      height: 50.0,
+                                      spinnerWidth: 40.0,
+                                      spinnerHeight: 40.0,
+                                      backgroundColor: Colors.transparent,
+                                      spinnerColor:
+                                          FlutterFlowTheme.of(context).primary,
+                                    ),
+                                  ),
+                                ),
+                              );
                             }
                           },
                         ),
@@ -443,11 +488,11 @@ class _MembersDetailWidgetState extends State<MembersDetailWidget> {
                               width: 100.0,
                               height: 70.0,
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: FlutterFlowTheme.of(context).darkGrey2,
                                 borderRadius: BorderRadius.circular(10.0),
                                 shape: BoxShape.rectangle,
                                 border: Border.all(
-                                  color: FlutterFlowTheme.of(context).darkGrey3,
+                                  color: Colors.transparent,
                                 ),
                               ),
                               child: Column(
@@ -458,7 +503,7 @@ class _MembersDetailWidgetState extends State<MembersDetailWidget> {
                                     FFIcons.kmute,
                                     color: FlutterFlowTheme.of(context)
                                         .primaryText,
-                                    size: 14.0,
+                                    size: 18.0,
                                   ),
                                   Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(

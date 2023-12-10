@@ -50,6 +50,8 @@ class AddUserToChatModel extends FlutterFlowModel<AddUserToChatWidget> {
   List<UsersRecord>? addedUserDocList;
   // Stores action output result for [Group Chat Action] action in Button widget.
   ChatsRecord? groupChat;
+  // Stores action output result for [Backend Call - Create Document] action in Button widget.
+  ChatMessagesRecord? createdChatDoc;
 
   /// Initialization and disposal methods.
 

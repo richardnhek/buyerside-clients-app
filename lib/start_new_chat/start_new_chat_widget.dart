@@ -115,7 +115,7 @@ class _StartNewChatWidgetState extends State<StartNewChatWidget> {
                 size: 25.0,
               ),
               onPressed: () async {
-                context.pop();
+                context.safePop();
               },
             ),
           ),
