@@ -76,7 +76,7 @@ class _UserDetailWidgetState extends State<UserDetailWidget> {
                 size: 25.0,
               ),
               onPressed: () async {
-                context.pop();
+                context.safePop();
               },
             ),
           ),

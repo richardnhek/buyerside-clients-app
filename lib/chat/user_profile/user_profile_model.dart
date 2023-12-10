@@ -7,6 +7,8 @@ class UserProfileModel extends FlutterFlowModel<UserProfileWidget> {
 
   bool? isPinned;
 
+  bool isProcessing = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

@@ -1,4 +1,5 @@
 import '/backend/backend.dart';
+import '/components/channel_button_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'all_chats_widget.dart' show AllChatsWidget;
 import 'package:flutter/material.dart';
@@ -35,14 +36,20 @@ class AllChatsModel extends FlutterFlowModel<AllChatsWidget> {
 
   // Stores action output result for [Firestore Query - Query a collection] action in AllChats widget.
   List<ChatsRecord>? allUserChats;
+  // Model for ChannelButton component.
+  late ChannelButtonModel channelButtonModel1;
 
   /// Initialization and disposal methods.
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    channelButtonModel1 = createModel(context, () => ChannelButtonModel());
+  }
 
   @override
-  void dispose() {}
+  void dispose() {
+    channelButtonModel1.dispose();
+  }
 
   /// Action blocks are added here.
 

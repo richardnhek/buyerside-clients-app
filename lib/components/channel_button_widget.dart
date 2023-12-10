@@ -10,10 +10,12 @@ class ChannelButtonWidget extends StatefulWidget {
     super.key,
     required this.channelName,
     required this.isRead,
-  });
+    bool? isPinned,
+  })  : isPinned = isPinned ?? false;
 
   final String? channelName;
   final bool? isRead;
+  final bool isPinned;
 
   @override
   _ChannelButtonWidgetState createState() => _ChannelButtonWidgetState();
@@ -48,8 +50,8 @@ class _ChannelButtonWidgetState extends State<ChannelButtonWidget> {
     return Container(
       width: double.infinity,
       height: 40.0,
-      decoration: const BoxDecoration(
-        color: Colors.transparent,
+      decoration: BoxDecoration(
+        color: widget.isRead == false ? const Color(0x1AFF6B78) : Colors.transparent,
       ),
       child: Padding(
         padding: const EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
@@ -72,7 +74,7 @@ class _ChannelButtonWidgetState extends State<ChannelButtonWidget> {
                       borderRadius: BorderRadius.circular(3.0),
                     ),
                   ),
-                  if (false)
+                  if (widget.isRead == false)
                     Align(
                       alignment: const AlignmentDirectional(0.80, 0.80),
                       child: Container(
@@ -103,6 +105,15 @@ class _ChannelButtonWidgetState extends State<ChannelButtonWidget> {
                 ),
               ),
             ),
+            if (widget.isPinned == true)
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                child: Icon(
+                  FFIcons.kpin,
+                  color: FlutterFlowTheme.of(context).darkGrey,
+                  size: 16.0,
+                ),
+              ),
           ],
         ),
       ),

@@ -3,6 +3,10 @@ import 'members_detail_widget.dart' show MembersDetailWidget;
 import 'package:flutter/material.dart';
 
 class MembersDetailModel extends FlutterFlowModel<MembersDetailWidget> {
+  ///  Local state fields for this page.
+
+  bool isProcessing = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

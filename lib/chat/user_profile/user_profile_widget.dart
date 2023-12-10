@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -85,7 +86,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                 size: 25,
               ),
               onPressed: () async {
-                context.pop();
+                context.safePop();
               },
             ),
           ),
@@ -154,7 +155,8 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                   children: [
                     Builder(
                       builder: (context) {
-                        if (widget.chatRef != FFAppState().pinnedChatRef) {
+                        if ((widget.chatRef != FFAppState().pinnedChatRef) &&
+                            (_model.isProcessing == false)) {
                           return InkWell(
                             splashColor: Colors.transparent,
                             focusColor: Colors.transparent,
@@ -162,6 +164,10 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                             highlightColor: Colors.transparent,
                             onTap: () async {
                               if (FFAppState().pinnedChatRef == null) {
+                                setState(() {
+                                  _model.isProcessing = true;
+                                });
+
                                 await widget.chatRef!.update({
                                   ...mapToFirestore(
                                     {
@@ -172,6 +178,9 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                 });
                                 FFAppState().update(() {
                                   FFAppState().pinnedChatRef = widget.chatRef;
+                                });
+                                setState(() {
+                                  _model.isProcessing = false;
                                 });
                               } else {
                                 ScaffoldMessenger.of(context).clearSnackBars();
@@ -187,8 +196,11 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                         fontSize: 15,
                                       ),
                                     ),
-                                    duration: Duration(milliseconds: 2000),
-                                    backgroundColor: Color(0x99000000),
+                                    duration:
+                                        const Duration(milliseconds: 1200),
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context)
+                                            .secondaryText,
                                   ),
                                 );
                               }
@@ -247,13 +259,19 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                               ),
                             ),
                           );
-                        } else {
+                        } else if ((widget.chatRef ==
+                                FFAppState().pinnedChatRef) &&
+                            (_model.isProcessing == false)) {
                           return InkWell(
                             splashColor: Colors.transparent,
                             focusColor: Colors.transparent,
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
+                              setState(() {
+                                _model.isProcessing = true;
+                              });
+
                               await widget.chatRef!.update({
                                 ...mapToFirestore(
                                   {
@@ -264,6 +282,9 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                               });
                               FFAppState().update(() {
                                 FFAppState().pinnedChatRef = null;
+                              });
+                              setState(() {
+                                _model.isProcessing = false;
                               });
                             },
                             child: Material(
@@ -322,6 +343,30 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                               ),
                             ),
                           );
+                        } else {
+                          return Container(
+                            width: 110.0,
+                            height: 70.0,
+                            decoration: const BoxDecoration(
+                              color: Colors.transparent,
+                            ),
+                            child: Align(
+                              alignment: const AlignmentDirectional(0.00, 0.00),
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: custom_widgets.FFlowSpinner(
+                                  width: 50.0,
+                                  height: 50.0,
+                                  spinnerWidth: 40.0,
+                                  spinnerHeight: 40.0,
+                                  backgroundColor: Colors.transparent,
+                                  spinnerColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                ),
+                              ),
+                            ),
+                          );
                         }
                       },
                     ),
@@ -335,11 +380,11 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                         width: 110,
                         height: 70,
                         decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
+                          color: FlutterFlowTheme.of(context).darkGrey2,
+                          borderRadius: BorderRadius.circular(10.0),
                           shape: BoxShape.rectangle,
                           border: Border.all(
-                            color: FlutterFlowTheme.of(context).darkGrey3,
+                            color: Colors.transparent,
                           ),
                         ),
                         alignment: AlignmentDirectional(0.00, 0.00),
@@ -676,8 +721,6 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                         await widget.chatRef!.delete();
 
                         context.goNamed('AllChats');
-                      } else {
-                        Navigator.pop(context);
                       }
                     },
                     text: 'Close conversation',
