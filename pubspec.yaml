@@ -118,6 +118,8 @@ dependencies:
   webview_flutter_platform_interface: 2.8.0
   webview_flutter_wkwebview: 3.9.4
   webviewx_plus: 0.3.3
+  open_file: 3.3.2
+  permission_handler: 11.1.0
   #CUSTOM_CODE_ENDED
 
   # The following adds the Cupertino Icons font to your application.
