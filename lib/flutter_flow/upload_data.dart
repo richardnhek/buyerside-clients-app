@@ -6,13 +6,23 @@ import 'package:flutter/foundation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mime_type/mime_type.dart';
+import 'package:mortgage_chat_app/backend/firebase_storage/storage.dart';
 import 'package:video_player/video_player.dart';
 
 import '../auth/firebase_auth/auth_util.dart';
 import 'flutter_flow_theme.dart';
 import 'flutter_flow_util.dart';
 
-const allowedFormats = {'image/png', 'image/jpeg', 'video/mp4', 'image/gif'};
+const allowedFormats = {
+  'image/png',
+  'image/jpeg',
+  'video/mp4',
+  'image/gif',
+  'application/pdf',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'text/plain'
+};
 
 class SelectedFile {
   const SelectedFile({
@@ -38,11 +48,7 @@ class MediaDimensions {
   final double? width;
 }
 
-enum MediaSource {
-  photoGallery,
-  videoGallery,
-  camera,
-}
+enum MediaSource { photoGallery, videoGallery, camera, files }
 
 // CUSTOM_CODE_STARTED
 Future<List<SelectedFile>?> selectMediaWithSourceBottomSheet({
@@ -220,7 +226,7 @@ Future<List<SelectedFile>?> selectMediaWithSourceBottomSheet({
                         onTap: () {
                           Navigator.pop(
                             context,
-                            MediaSource.camera,
+                            MediaSource.files,
                           );
                         },
                         child: Text(
@@ -238,6 +244,11 @@ Future<List<SelectedFile>?> selectMediaWithSourceBottomSheet({
       });
   if (mediaSource == null) {
     return null;
+  }
+  if (mediaSource == MediaSource.files) {
+    return selectFile(
+        storageFolderPath: storageFolderPath,
+        allowedExtensions: ['pdf', 'doc', 'docx']);
   }
   return selectMedia(
     storageFolderPath: storageFolderPath,
@@ -275,6 +286,7 @@ Future<List<SelectedFile>?> selectMedia({
     if (pickedMedia.isEmpty) {
       return null;
     }
+
     return Future.wait(pickedMedia.asMap().entries.map((e) async {
       final index = e.key;
       final media = e.value;
@@ -340,7 +352,7 @@ bool validateFileFormat(String filePath, BuildContext context) {
   return false;
 }
 
-Future<SelectedFile?> selectFile({
+Future<List<SelectedFile>?> selectFile({
   String? storageFolderPath,
   List<String>? allowedExtensions,
 }) =>
@@ -348,7 +360,7 @@ Future<SelectedFile?> selectFile({
       storageFolderPath: storageFolderPath,
       allowedExtensions: allowedExtensions,
       multiFile: false,
-    ).then((value) => value?.first);
+    ).then((value) => value);
 
 Future<List<SelectedFile>?> selectFiles({
   String? storageFolderPath,
