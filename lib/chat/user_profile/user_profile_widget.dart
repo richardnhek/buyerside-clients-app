@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:aligned_dialog/aligned_dialog.dart';
@@ -520,51 +521,81 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                                   highlightColor:
                                                       Colors.transparent,
                                                   onTap: () async {
-                                                    await showAlignedDialog(
-                                                      context: context,
-                                                      isGlobal: true,
-                                                      avoidOverflow: false,
-                                                      targetAnchor:
-                                                          const AlignmentDirectional(
-                                                                  0.0, 0.0)
-                                                              .resolve(
-                                                                  Directionality.of(
-                                                                      context)),
-                                                      followerAnchor:
-                                                          const AlignmentDirectional(
-                                                                  0.0, 0.0)
-                                                              .resolve(
-                                                                  Directionality.of(
-                                                                      context)),
-                                                      builder: (dialogContext) {
-                                                        return Material(
-                                                          color: Colors
-                                                              .transparent,
-                                                          child: WebViewAware(
+                                                    if ((functions.getFileExt(filesSharedItem.image) == 'jpg') ||
+                                                        (functions.getFileExt(
+                                                                filesSharedItem
+                                                                    .image) ==
+                                                            'png') ||
+                                                        (functions.getFileExt(
+                                                                filesSharedItem
+                                                                    .image) ==
+                                                            'jpeg')) {
+                                                      await showAlignedDialog(
+                                                        context: context,
+                                                        isGlobal: true,
+                                                        avoidOverflow: false,
+                                                        targetAnchor:
+                                                            const AlignmentDirectional(
+                                                                    0.0, 0.0)
+                                                                .resolve(
+                                                                    Directionality.of(
+                                                                        context)),
+                                                        followerAnchor:
+                                                            const AlignmentDirectional(
+                                                                    0.0, 0.0)
+                                                                .resolve(
+                                                                    Directionality.of(
+                                                                        context)),
+                                                        builder:
+                                                            (dialogContext) {
+                                                          return Material(
+                                                            color: Colors
+                                                                .transparent,
+                                                            child: WebViewAware(
+                                                                child:
+                                                                    GestureDetector(
+                                                              onTap: () => _model
+                                                                      .unfocusNode
+                                                                      .canRequestFocus
+                                                                  ? FocusScope.of(
+                                                                          context)
+                                                                      .requestFocus(
+                                                                          _model
+                                                                              .unfocusNode)
+                                                                  : FocusScope.of(
+                                                                          context)
+                                                                      .unfocus(),
                                                               child:
-                                                                  GestureDetector(
-                                                            onTap: () => _model
-                                                                    .unfocusNode
-                                                                    .canRequestFocus
-                                                                ? FocusScope.of(
-                                                                        context)
-                                                                    .requestFocus(
-                                                                        _model
-                                                                            .unfocusNode)
-                                                                : FocusScope.of(
-                                                                        context)
-                                                                    .unfocus(),
-                                                            child:
-                                                                FileViewerComponentWidget(
-                                                              fileThumbnail:
-                                                                  filesSharedItem
-                                                                      .image,
-                                                            ),
-                                                          )),
-                                                        );
-                                                      },
-                                                    ).then((value) =>
-                                                        setState(() {}));
+                                                                  FileViewerComponentWidget(
+                                                                fileThumbnail:
+                                                                    filesSharedItem
+                                                                        .image,
+                                                              ),
+                                                            )),
+                                                          );
+                                                        },
+                                                      ).then((value) =>
+                                                          setState(() {}));
+                                                    } else if ((functions.getFileExt(
+                                                                filesSharedItem
+                                                                    .image) ==
+                                                            'pdf') ||
+                                                        (functions.getFileExt(
+                                                                filesSharedItem
+                                                                    .image) ==
+                                                            'doc') ||
+                                                        (functions.getFileExt(
+                                                                filesSharedItem
+                                                                    .image) ==
+                                                            'docx') ||
+                                                        (functions.getFileExt(
+                                                                filesSharedItem
+                                                                    .image) ==
+                                                            'txt')) {
+                                                      await actions.saveFile(
+                                                        filesSharedItem.image,
+                                                      );
+                                                    }
                                                   },
                                                   child: ClipRRect(
                                                     borderRadius:

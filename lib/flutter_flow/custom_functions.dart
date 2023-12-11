@@ -71,3 +71,17 @@ String? createWelcomeMessage(List<String> userNames) {
     return "$allButLast, and $last have been added to the channel. Let's give them a warm welcome!";
   }
 }
+
+String? getFileExt(String? filePath) {
+  if (filePath == null || !filePath.contains('.')) {
+    return null;
+  }
+
+  // Split the URL by '?', take the first part to ignore URL parameters
+  var mainPath = filePath.split('?').first;
+
+  // Extract the extension
+  var extension = mainPath.split('.').last;
+
+  return extension;
+}
