@@ -248,7 +248,7 @@ Future<List<SelectedFile>?> selectMediaWithSourceBottomSheet({
   if (mediaSource == MediaSource.files) {
     return selectFile(
         storageFolderPath: storageFolderPath,
-        allowedExtensions: ['pdf', 'doc', 'docx']);
+        allowedExtensions: ['pdf', 'doc', 'docx', 'txt']);
   }
   return selectMedia(
     storageFolderPath: storageFolderPath,
