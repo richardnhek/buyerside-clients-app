@@ -68,6 +68,18 @@ class FFAppState extends ChangeNotifier {
         ? prefs.setString('ff_pinnedChatRef', value.path)
         : prefs.remove('ff_pinnedChatRef');
   }
+
+  DocumentReference? _forwardMessageRef;
+  DocumentReference? get forwardMessageRef => _forwardMessageRef;
+  set forwardMessageRef(DocumentReference? value) {
+    _forwardMessageRef = value;
+  }
+
+  DocumentReference? _forwardToRef;
+  DocumentReference? get forwardToRef => _forwardToRef;
+  set forwardToRef(DocumentReference? value) {
+    _forwardToRef = value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {
