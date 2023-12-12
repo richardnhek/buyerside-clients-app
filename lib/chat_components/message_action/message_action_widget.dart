@@ -1,8 +1,10 @@
 import '/backend/backend.dart';
+import '/components/forward_message_action_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'message_action_model.dart';
 export 'message_action_model.dart';
 
@@ -95,32 +97,54 @@ class _MessageActionWidgetState extends State<MessageActionWidget> {
                 ),
               ),
             ),
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).secondaryBackground,
-              ),
-              child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 8.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Icon(
-                      FFIcons.kicon15,
-                      color: FlutterFlowTheme.of(context).primaryText,
-                      size: 16.0,
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
-                        child: Text(
-                          'Forward message',
-                          style: FlutterFlowTheme.of(context).bodyMedium,
+            InkWell(
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () async {
+                await showModalBottomSheet(
+                  isScrollControlled: true,
+                  backgroundColor: Colors.transparent,
+                  context: context,
+                  builder: (context) {
+                    return WebViewAware(
+                        child: Padding(
+                      padding: MediaQuery.viewInsetsOf(context),
+                      child: ForwardMessageActionWidget(
+                        forwardMessageRef: widget.chatMessageReference!,
+                      ),
+                    ));
+                  },
+                ).then((value) => safeSetState(() {}));
+              },
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                ),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 8.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Icon(
+                        FFIcons.kicon15,
+                        color: FlutterFlowTheme.of(context).primaryText,
+                        size: 16.0,
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              12.0, 0.0, 0.0, 0.0),
+                          child: Text(
+                            'Forward message',
+                            style: FlutterFlowTheme.of(context).bodyMedium,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

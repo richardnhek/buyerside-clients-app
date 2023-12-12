@@ -44,6 +44,11 @@ class ChatMessagesRecord extends FirestoreRecord {
   DocumentReference? get chatMessageRef => _chatMessageRef;
   bool hasChatMessageRef() => _chatMessageRef != null;
 
+  // "is_forward" field.
+  bool? _isForward;
+  bool get isForward => _isForward ?? false;
+  bool hasIsForward() => _isForward != null;
+
   void _initializeFields() {
     _user = snapshotData['user'] as DocumentReference?;
     _chat = snapshotData['chat'] as DocumentReference?;
@@ -51,6 +56,7 @@ class ChatMessagesRecord extends FirestoreRecord {
     _image = snapshotData['image'] as String?;
     _timestamp = snapshotData['timestamp'] as DateTime?;
     _chatMessageRef = snapshotData['chat_message_ref'] as DocumentReference?;
+    _isForward = snapshotData['is_forward'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -94,6 +100,7 @@ Map<String, dynamic> createChatMessagesRecordData({
   String? image,
   DateTime? timestamp,
   DocumentReference? chatMessageRef,
+  bool? isForward,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -103,6 +110,7 @@ Map<String, dynamic> createChatMessagesRecordData({
       'image': image,
       'timestamp': timestamp,
       'chat_message_ref': chatMessageRef,
+      'is_forward': isForward,
     }.withoutNulls,
   );
 
@@ -120,12 +128,20 @@ class ChatMessagesRecordDocumentEquality
         e1?.text == e2?.text &&
         e1?.image == e2?.image &&
         e1?.timestamp == e2?.timestamp &&
-        e1?.chatMessageRef == e2?.chatMessageRef;
+        e1?.chatMessageRef == e2?.chatMessageRef &&
+        e1?.isForward == e2?.isForward;
   }
 
   @override
-  int hash(ChatMessagesRecord? e) => const ListEquality().hash(
-      [e?.user, e?.chat, e?.text, e?.image, e?.timestamp, e?.chatMessageRef]);
+  int hash(ChatMessagesRecord? e) => const ListEquality().hash([
+        e?.user,
+        e?.chat,
+        e?.text,
+        e?.image,
+        e?.timestamp,
+        e?.chatMessageRef,
+        e?.isForward
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is ChatMessagesRecord;

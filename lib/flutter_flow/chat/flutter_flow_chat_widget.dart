@@ -1,6 +1,8 @@
 // CUSTOM_CODE_STARTED
 import 'package:flutter/services.dart';
 import 'package:mortgage_chat_app/chat_components/chat_action/chat_action_widget.dart';
+import 'package:mortgage_chat_app/components/forward_message_action_widget.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 
 import '../flutter_flow_theme.dart';
 import 'index.dart';
@@ -555,41 +557,67 @@ class _FFChatWidgetState extends State<FFChatWidget> {
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryBackground,
                                           ),
-                                          child: Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .fromSTEB(0.0, 8.0, 0.0, 8.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(
-                                                          12.0, 0.0, 0.0, 0.0),
-                                                  child: Icon(
-                                                    FFIcons.kicon15,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText,
-                                                    size: 16.0,
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: Padding(
+                                          child: GestureDetector(
+                                            onTap: () async {
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                context: context,
+                                                builder: (context) {
+                                                  return WebViewAware(
+                                                      child: Padding(
+                                                    padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                    child:
+                                                        ForwardMessageActionWidget(
+                                                      forwardMessageRef: message.customProperties?['reference'],
+                                                    ),
+                                                  ));
+                                                },
+                                              ).then((value) =>
+                                                  safeSetState(() {}));
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                      0.0, 8.0, 0.0, 8.0),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Padding(
                                                     padding:
                                                         const EdgeInsetsDirectional
                                                             .fromSTEB(12.0, 0.0,
                                                             0.0, 0.0),
-                                                    child: Text(
-                                                      'Forward message',
-                                                      style:
+                                                    child: Icon(
+                                                      FFIcons.kicon15,
+                                                      color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyMedium,
+                                                              .primaryText,
+                                                      size: 16.0,
                                                     ),
                                                   ),
-                                                ),
-                                              ],
+                                                  Expanded(
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(12.0,
+                                                              0.0, 0.0, 0.0),
+                                                      child: Text(
+                                                        'Forward message',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),

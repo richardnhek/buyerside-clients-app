@@ -85,3 +85,10 @@ String? getFileExt(String? filePath) {
 
   return extension;
 }
+
+String? fullFwdMessage(
+  String fwdMessage,
+  String newMessage,
+) {
+  return fwdMessage + '\n' + newMessage;
+}
