@@ -346,37 +346,41 @@ class _LoginWidgetState extends State<LoginWidget> {
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 20.0, 0.0, 20.0, 0.0),
                             child: FFButtonWidget(
-                              onPressed: () async {
-                                final phoneNumberVal =
-                                    _model.phoneNumberController.text;
-                                if (phoneNumberVal.isEmpty ||
-                                    !phoneNumberVal.startsWith('+')) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text(
-                                          'Phone Number is required and has to start with +.'),
-                                    ),
-                                  );
-                                  return;
-                                }
-                                await authManager.beginPhoneAuth(
-                                  context: context,
-                                  phoneNumber: phoneNumberVal,
-                                  onCodeSent: (context) async {
-                                    context.goNamedAuth(
-                                      'VerificationPage',
-                                      context.mounted,
-                                      queryParameters: {
-                                        'phoneNumber': serializeParam(
-                                          _model.phoneNumberController.text,
-                                          ParamType.String,
-                                        ),
-                                      }.withoutNulls,
-                                      ignoreRedirect: true,
-                                    );
-                                  },
-                                );
-                              },
+                              onPressed: _model.phoneNumberController.text == ''
+                                  ? null
+                                  : () async {
+                                      final phoneNumberVal =
+                                          _model.phoneNumberController.text;
+                                      if (phoneNumberVal.isEmpty ||
+                                          !phoneNumberVal.startsWith('+')) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                            content: Text(
+                                                'Phone Number is required and has to start with +.'),
+                                          ),
+                                        );
+                                        return;
+                                      }
+                                      await authManager.beginPhoneAuth(
+                                        context: context,
+                                        phoneNumber: phoneNumberVal,
+                                        onCodeSent: (context) async {
+                                          context.goNamedAuth(
+                                            'VerificationPage',
+                                            context.mounted,
+                                            queryParameters: {
+                                              'phoneNumber': serializeParam(
+                                                _model
+                                                    .phoneNumberController.text,
+                                                ParamType.String,
+                                              ),
+                                            }.withoutNulls,
+                                            ignoreRedirect: true,
+                                          );
+                                        },
+                                      );
+                                    },
                               text: 'Continue',
                               options: FFButtonOptions(
                                 width: double.infinity,
@@ -398,6 +402,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   width: 0.0,
                                 ),
                                 borderRadius: BorderRadius.circular(8.0),
+                                disabledColor:
+                                    FlutterFlowTheme.of(context).darkGrey,
                               ),
                             ),
                           ),
