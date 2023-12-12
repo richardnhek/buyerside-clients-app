@@ -9,7 +9,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -81,12 +80,13 @@ class _ForwardMessageActionWidgetState
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                   child: Container(
-                    width: 75,
-                    decoration: BoxDecoration(),
+                    width: 75.0,
+                    decoration: const BoxDecoration(),
                     child: Align(
-                      alignment: AlignmentDirectional(0.00, 0.00),
+                      alignment: const AlignmentDirectional(0.00, 0.00),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -100,7 +100,7 @@ class _ForwardMessageActionWidgetState
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Inter',
-                                    fontSize: 16,
+                                    fontSize: 16.0,
                                     lineHeight: 1.2,
                                   ),
                         ),
@@ -118,16 +118,16 @@ class _ForwardMessageActionWidgetState
                       ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                   child: Container(
-                    width: 75,
-                    decoration: BoxDecoration(),
+                    width: 75.0,
+                    decoration: const BoxDecoration(),
                     child: Visibility(
                       visible: (FFAppState().forwardToRef != null) &&
-                          (_model.textController.text != null &&
-                              _model.textController.text != ''),
+                          (_model.textController.text != ''),
                       child: Align(
-                        alignment: AlignmentDirectional(0.00, 0.00),
+                        alignment: const AlignmentDirectional(0.00, 0.00),
                         child: InkWell(
                           splashColor: Colors.transparent,
                           focusColor: Colors.transparent,
@@ -155,6 +155,8 @@ class _ForwardMessageActionWidgetState
                                   'From ${_model.fwdUserDoc?.displayName} : ${_model.forwardMessageDoc?.text}',
                                   _model.textController.text),
                               timestamp: getCurrentTimestamp,
+                              isForward: true,
+                              fwdMessageRef: widget.forwardMessageRef,
                             ));
                             _model.createdFwdMessage =
                                 ChatMessagesRecord.getDocumentFromData(
@@ -165,6 +167,8 @@ class _ForwardMessageActionWidgetState
                                           'From ${_model.fwdUserDoc?.displayName} : ${_model.forwardMessageDoc?.text}',
                                           _model.textController.text),
                                       timestamp: getCurrentTimestamp,
+                                      isForward: true,
+                                      fwdMessageRef: widget.forwardMessageRef,
                                     ),
                                     chatMessagesRecordReference2);
 
@@ -185,7 +189,7 @@ class _ForwardMessageActionWidgetState
                                 .bodyMedium
                                 .override(
                                   fontFamily: 'Inter',
-                                  fontSize: 16,
+                                  fontSize: 16.0,
                                   lineHeight: 1.2,
                                 ),
                           ),
@@ -203,15 +207,15 @@ class _ForwardMessageActionWidgetState
             color: FlutterFlowTheme.of(context).darkGrey3,
           ),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-            child: Container(
+            padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+            child: SizedBox(
               width: double.infinity,
               child: TextFormField(
                 controller: _model.textController,
                 focusNode: _model.textFieldFocusNode,
                 onChanged: (_) => EasyDebounce.debounce(
                   '_model.textController',
-                  Duration(milliseconds: 100),
+                  const Duration(milliseconds: 100),
                   () => setState(() {}),
                 ),
                 autofocus: true,
@@ -328,10 +332,11 @@ class _ForwardMessageActionWidgetState
                                             color: FlutterFlowTheme.of(context)
                                                 .secondary,
                                             fontWeight: FontWeight.w500,
-                                            fontSize: 15,
+                                            fontSize: 15.0,
                                           ),
                                         ),
-                                        duration: Duration(milliseconds: 1000),
+                                        duration:
+                                            const Duration(milliseconds: 1000),
                                         backgroundColor:
                                             FlutterFlowTheme.of(context)
                                                 .secondaryText,
@@ -412,10 +417,11 @@ class _ForwardMessageActionWidgetState
                                         color: FlutterFlowTheme.of(context)
                                             .secondary,
                                         fontWeight: FontWeight.w500,
-                                        fontSize: 15,
+                                        fontSize: 15.0,
                                       ),
                                     ),
-                                    duration: Duration(milliseconds: 1000),
+                                    duration:
+                                        const Duration(milliseconds: 1000),
                                     backgroundColor:
                                         FlutterFlowTheme.of(context)
                                             .secondaryText,
