@@ -2,14 +2,18 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
+
 import 'login_model.dart';
 export 'login_model.dart';
 
 class LoginWidget extends StatefulWidget {
-  const LoginWidget({super.key});
+  const LoginWidget({Key? key}) : super(key: key);
 
   @override
   _LoginWidgetState createState() => _LoginWidgetState();
@@ -62,28 +66,27 @@ class _LoginWidgetState extends State<LoginWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 64.0, 0.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(0, 64, 0, 0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 Align(
-                  alignment: const AlignmentDirectional(-1.00, -1.00),
+                  alignment: AlignmentDirectional(-1.00, -1.00),
                   child: Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(0.0),
+                      borderRadius: BorderRadius.circular(0),
                       child: Image.asset(
                         'assets/images/logo.png',
-                        height: 35.0,
+                        height: 35,
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
                 ),
                 Divider(
-                  height: 30.0,
-                  thickness: 1.0,
+                  height: 30,
+                  thickness: 1,
                   color: FlutterFlowTheme.of(context).darkGrey3,
                 ),
                 Expanded(
@@ -92,19 +95,18 @@ class _LoginWidgetState extends State<LoginWidget> {
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                     ),
-                    alignment: const AlignmentDirectional(0.00, -1.00),
+                    alignment: AlignmentDirectional(0.00, -1.00),
                     child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 50.0),
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 50),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Align(
-                            alignment: const AlignmentDirectional(0.00, 0.00),
+                            alignment: AlignmentDirectional(0.00, 0.00),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  20.0, 0.0, 20.0, 0.0),
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -116,13 +118,13 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         .displaySmall
                                         .override(
                                           fontFamily: 'Inter',
-                                          fontSize: 23.0,
+                                          fontSize: 23,
                                           fontWeight: FontWeight.w500,
                                         ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 15.0, 0.0, 0.0),
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 15, 0, 0),
                                     child: Text(
                                       'Please enter your phone number to verify and join the workspace.',
                                       style: FlutterFlowTheme.of(context)
@@ -131,18 +133,18 @@ class _LoginWidgetState extends State<LoginWidget> {
                                             fontFamily: 'Inter',
                                             color: FlutterFlowTheme.of(context)
                                                 .darkGrey,
-                                            fontSize: 15.0,
+                                            fontSize: 15,
                                           ),
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 40.0, 0.0, 0.0),
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 40, 0, 0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Align(
-                                          alignment: const AlignmentDirectional(
+                                          alignment: AlignmentDirectional(
                                               -1.00, -1.00),
                                           child: Text(
                                             'Phone number',
@@ -150,7 +152,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                 .headlineMedium
                                                 .override(
                                                   fontFamily: 'Inter',
-                                                  fontSize: 14.0,
+                                                  fontSize: 14,
                                                   fontWeight: FontWeight.w500,
                                                   lineHeight: 1.5,
                                                 ),
@@ -158,8 +160,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 8.0, 0.0, 0.0),
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 8, 0, 0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
@@ -168,19 +170,27 @@ class _LoginWidgetState extends State<LoginWidget> {
                                               Expanded(
                                                 child: Align(
                                                   alignment:
-                                                      const AlignmentDirectional(
+                                                      AlignmentDirectional(
                                                           0.00, 0.00),
                                                   child: TextFormField(
                                                     controller: _model
                                                         .phoneNumberController,
                                                     focusNode: _model
                                                         .phoneNumberFocusNode,
+                                                    onChanged: (_) =>
+                                                        EasyDebounce.debounce(
+                                                      '_model.phoneNumberController',
+                                                      Duration(
+                                                          milliseconds: 100),
+                                                      () => setState(() {}),
+                                                    ),
                                                     onFieldSubmitted:
                                                         (_) async {
                                                       final phoneNumberVal = _model
                                                           .phoneNumberController
                                                           .text;
-                                                      if (phoneNumberVal
+                                                      if (phoneNumberVal == null ||
+                                                          phoneNumberVal
                                                               .isEmpty ||
                                                           !phoneNumberVal
                                                               .startsWith(
@@ -188,7 +198,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                         ScaffoldMessenger.of(
                                                                 context)
                                                             .showSnackBar(
-                                                          const SnackBar(
+                                                          SnackBar(
                                                             content: Text(
                                                                 'Phone Number is required and has to start with +.'),
                                                           ),
@@ -232,7 +242,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                                     'Inter',
                                                                 color: Colors
                                                                     .transparent,
-                                                                fontSize: 16.0,
+                                                                fontSize: 16,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w600,
@@ -249,7 +259,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .darkGrey,
-                                                                fontSize: 16.0,
+                                                                fontSize: 16,
                                                                 lineHeight: 1.5,
                                                               ),
                                                       enabledBorder:
@@ -258,11 +268,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .darkGrey3,
-                                                          width: 1.0,
+                                                          width: 1,
                                                         ),
                                                         borderRadius:
                                                             BorderRadius
-                                                                .circular(8.0),
+                                                                .circular(8),
                                                       ),
                                                       focusedBorder:
                                                           OutlineInputBorder(
@@ -270,45 +280,42 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .darkGrey3,
-                                                          width: 1.0,
+                                                          width: 1,
                                                         ),
                                                         borderRadius:
                                                             BorderRadius
-                                                                .circular(8.0),
+                                                                .circular(8),
                                                       ),
                                                       errorBorder:
                                                           OutlineInputBorder(
-                                                        borderSide: const BorderSide(
+                                                        borderSide: BorderSide(
                                                           color:
                                                               Color(0x00000000),
-                                                          width: 1.0,
+                                                          width: 1,
                                                         ),
                                                         borderRadius:
                                                             BorderRadius
-                                                                .circular(8.0),
+                                                                .circular(8),
                                                       ),
                                                       focusedErrorBorder:
                                                           OutlineInputBorder(
-                                                        borderSide: const BorderSide(
+                                                        borderSide: BorderSide(
                                                           color:
                                                               Color(0x00000000),
-                                                          width: 1.0,
+                                                          width: 1,
                                                         ),
                                                         borderRadius:
                                                             BorderRadius
-                                                                .circular(8.0),
+                                                                .circular(8),
                                                       ),
                                                       filled: true,
                                                       fillColor: FlutterFlowTheme
                                                               .of(context)
                                                           .secondaryBackground,
                                                       contentPadding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  10.0,
-                                                                  10.0,
-                                                                  10.0,
-                                                                  10.0),
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(10, 10,
+                                                                  10, 10),
                                                     ),
                                                     style: FlutterFlowTheme.of(
                                                             context)
@@ -318,7 +325,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .primaryText,
-                                                          fontSize: 16.0,
+                                                          fontSize: 16,
                                                         ),
                                                     maxLines: null,
                                                     keyboardType:
@@ -343,48 +350,55 @@ class _LoginWidgetState extends State<LoginWidget> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                20.0, 0.0, 20.0, 0.0),
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
                             child: FFButtonWidget(
-                              onPressed: () async {
-                                final phoneNumberVal =
-                                    _model.phoneNumberController.text;
-                                if (phoneNumberVal.isEmpty ||
-                                    !phoneNumberVal.startsWith('+')) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text(
-                                          'Phone Number is required and has to start with +.'),
-                                    ),
-                                  );
-                                  return;
-                                }
-                                await authManager.beginPhoneAuth(
-                                  context: context,
-                                  phoneNumber: phoneNumberVal,
-                                  onCodeSent: (context) async {
-                                    context.goNamedAuth(
-                                      'VerificationPage',
-                                      context.mounted,
-                                      queryParameters: {
-                                        'phoneNumber': serializeParam(
-                                          _model.phoneNumberController.text,
-                                          ParamType.String,
-                                        ),
-                                      }.withoutNulls,
-                                      ignoreRedirect: true,
-                                    );
-                                  },
-                                );
-                              },
+                              onPressed: _model.phoneNumberController.text ==
+                                          null ||
+                                      _model.phoneNumberController.text == ''
+                                  ? null
+                                  : () async {
+                                      final phoneNumberVal =
+                                          _model.phoneNumberController.text;
+                                      if (phoneNumberVal == null ||
+                                          phoneNumberVal.isEmpty ||
+                                          !phoneNumberVal.startsWith('+')) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                                'Phone Number is required and has to start with +.'),
+                                          ),
+                                        );
+                                        return;
+                                      }
+                                      await authManager.beginPhoneAuth(
+                                        context: context,
+                                        phoneNumber: phoneNumberVal,
+                                        onCodeSent: (context) async {
+                                          context.goNamedAuth(
+                                            'VerificationPage',
+                                            context.mounted,
+                                            queryParameters: {
+                                              'phoneNumber': serializeParam(
+                                                _model
+                                                    .phoneNumberController.text,
+                                                ParamType.String,
+                                              ),
+                                            }.withoutNulls,
+                                            ignoreRedirect: true,
+                                          );
+                                        },
+                                      );
+                                    },
                               text: 'Continue',
                               options: FFButtonOptions(
                                 width: double.infinity,
-                                height: 50.0,
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
+                                height: 50,
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                                iconPadding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                                 color: FlutterFlowTheme.of(context).primary,
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
@@ -392,12 +406,14 @@ class _LoginWidgetState extends State<LoginWidget> {
                                       fontFamily: 'Inter',
                                       color: Colors.white,
                                     ),
-                                elevation: 0.0,
-                                borderSide: const BorderSide(
+                                elevation: 0,
+                                borderSide: BorderSide(
                                   color: Colors.transparent,
-                                  width: 0.0,
+                                  width: 0,
                                 ),
-                                borderRadius: BorderRadius.circular(8.0),
+                                borderRadius: BorderRadius.circular(8),
+                                disabledColor:
+                                    FlutterFlowTheme.of(context).darkGrey,
                               ),
                             ),
                           ),

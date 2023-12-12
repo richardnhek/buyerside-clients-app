@@ -9,6 +9,8 @@ class VerificationPageModel extends FlutterFlowModel<VerificationPageWidget> {
 
   bool isSent = false;
 
+  bool isFilled = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

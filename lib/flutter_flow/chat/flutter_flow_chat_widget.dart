@@ -1,7 +1,9 @@
 // CUSTOM_CODE_STARTED
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/services.dart';
 import 'package:mortgage_chat_app/chat_components/chat_action/chat_action_widget.dart';
 import 'package:mortgage_chat_app/components/forward_message_action_widget.dart';
+import 'package:mortgage_chat_app/flutter_flow/custom_functions.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 
 import '../flutter_flow_theme.dart';
@@ -572,7 +574,9 @@ class _FFChatWidgetState extends State<FFChatWidget> {
                                                             context),
                                                     child:
                                                         ForwardMessageActionWidget(
-                                                      forwardMessageRef: message.customProperties?['reference'],
+                                                      forwardMessageRef: message
+                                                              .customProperties?[
+                                                          'reference'],
                                                     ),
                                                   ));
                                                 },
@@ -903,7 +907,12 @@ class _FFChatWidgetState extends State<FFChatWidget> {
                                                   ),
                                                 ),
                                               )
-                                            else
+                                            else if (message.customProperties![
+                                                        'image'] ==
+                                                    null ||
+                                                message
+                                                    .customProperties!['image']
+                                                    .isEmpty)
                                               Expanded(
                                                 child: Text(message.text,
                                                     style: GoogleFonts.inter(
@@ -913,7 +922,49 @@ class _FFChatWidgetState extends State<FFChatWidget> {
                                                           FontWeight.w400,
                                                       color: Colors.black,
                                                     )),
-                                              ),
+                                              )
+                                            else if ([
+                                              'pdf',
+                                              'txt',
+                                              'doc',
+                                              'docx'
+                                            ].contains(getFileExt(message
+                                                .customProperties!['image'])))
+                                              Expanded(
+                                                  child: Row(
+                                                children: [
+                                                  const Icon(
+                                                    Icons.file_present_rounded,
+                                                    size: 24,
+                                                    color: Color(0xFF848484),
+                                                  ),
+                                                  Text(
+                                                      getFileName(message
+                                                                  .customProperties![
+                                                              'image']) ??
+                                                          'File',
+                                                      style: GoogleFonts.inter(
+                                                        fontSize: 14,
+                                                        height: 1.2,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        color: const Color(
+                                                            0xFF848484),
+                                                      ))
+                                                ],
+                                              ))
+                                            else
+                                              Expanded(
+                                                  child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(4),
+                                                child: CachedNetworkImage(
+                                                  imageUrl:
+                                                      message.customProperties![
+                                                          'image'],
+                                                  fit: BoxFit.fitWidth,
+                                                ),
+                                              )),
                                             const SizedBox(width: 8),
                                             if (!shouldShowAvatar &&
                                                 messageHoverStates[message

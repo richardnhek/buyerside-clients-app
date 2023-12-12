@@ -593,6 +593,36 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                                                 filesSharedItem
                                                                     .image) ==
                                                             'txt')) {
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .clearSnackBars();
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                        SnackBar(
+                                                          content: Text(
+                                                            'Saving and opening file....',
+                                                            style: GoogleFonts
+                                                                .getFont(
+                                                              'Inter',
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryBtnText,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontSize: 15.0,
+                                                            ),
+                                                          ),
+                                                          duration: const Duration(
+                                                              milliseconds:
+                                                                  1200),
+                                                          backgroundColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .secondaryText,
+                                                        ),
+                                                      );
                                                       await actions.saveFile(
                                                         filesSharedItem.image,
                                                       );

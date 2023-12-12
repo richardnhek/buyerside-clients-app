@@ -186,6 +186,11 @@ class _VerificationPageWidgetState extends State<VerificationPageWidget> {
                                   ),
                                   controller: _model.pinCodeController,
                                   onChanged: (_) {},
+                                  onCompleted: (_) async {
+                                    setState(() {
+                                      _model.isFilled = true;
+                                    });
+                                  },
                                   autovalidateMode:
                                       AutovalidateMode.onUserInteraction,
                                   validator: _model.pinCodeControllerValidator
@@ -327,29 +332,34 @@ class _VerificationPageWidgetState extends State<VerificationPageWidget> {
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               20.0, 0.0, 20.0, 0.0),
                           child: FFButtonWidget(
-                            onPressed: () async {
-                              GoRouter.of(context).prepareAuthEvent();
-                              final smsCodeVal = _model.pinCodeController!.text;
-                              if (smsCodeVal.isEmpty) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content:
-                                        Text('Enter SMS verification code.'),
-                                  ),
-                                );
-                                return;
-                              }
-                              final phoneVerifiedUser =
-                                  await authManager.verifySmsCode(
-                                context: context,
-                                smsCode: smsCodeVal,
-                              );
-                              if (phoneVerifiedUser == null) {
-                                return;
-                              }
+                            onPressed: _model.isFilled == false
+                                ? null
+                                : () async {
+                                    GoRouter.of(context).prepareAuthEvent();
+                                    final smsCodeVal =
+                                        _model.pinCodeController!.text;
+                                    if (smsCodeVal.isEmpty) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                              'Enter SMS verification code.'),
+                                        ),
+                                      );
+                                      return;
+                                    }
+                                    final phoneVerifiedUser =
+                                        await authManager.verifySmsCode(
+                                      context: context,
+                                      smsCode: smsCodeVal,
+                                    );
+                                    if (phoneVerifiedUser == null) {
+                                      return;
+                                    }
 
-                              context.goNamedAuth('AllChats', context.mounted);
-                            },
+                                    context.goNamedAuth(
+                                        'AllChats', context.mounted);
+                                  },
                             text: 'Confirm',
                             options: FFButtonOptions(
                               width: double.infinity,
@@ -371,6 +381,8 @@ class _VerificationPageWidgetState extends State<VerificationPageWidget> {
                                 width: 0.0,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
+                              disabledColor:
+                                  FlutterFlowTheme.of(context).darkGrey,
                             ),
                           ),
                         ),

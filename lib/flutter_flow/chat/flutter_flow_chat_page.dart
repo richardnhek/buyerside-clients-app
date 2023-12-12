@@ -9,7 +9,7 @@ class FFChatPage extends StatefulWidget {
   FFChatPage({
     Key? key,
     required this.chatInfo,
-    this.allowImages = false,
+    this.allowImages = true,
     // Theme settings
     this.backgroundColor,
     this.timeDisplaySetting,
@@ -82,14 +82,9 @@ class _FFChatPageState extends State<FFChatPage> {
   }
 
   void handleMessageDeleted(DocumentReference deletedMessageRef) {
-    // setState(() {
-    //   messages.removeWhere((message) => message.reference == deletedMessageRef);
-    // });
     setState(() {
-      // Remove the message from the allMessages map
       allMessages.remove(deletedMessageRef.id);
 
-      // Rebuild the messages list from the updated allMessages map
       messages = allMessages.values.toList();
       messages.sort((a, b) => a.timestamp!.compareTo(b.timestamp!));
     });
@@ -175,7 +170,8 @@ class _FFChatPageState extends State<FFChatPage> {
                     text: message.text,
                     createdAt: message.timestamp!,
                     customProperties: {
-                      'reference': message.reference, // Custom property
+                      'reference': message.reference,
+                      'image': message.image // Custom property
                     },
                   ),
                 )
