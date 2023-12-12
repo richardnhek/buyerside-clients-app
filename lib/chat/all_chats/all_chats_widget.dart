@@ -422,6 +422,9 @@ class _AllChatsWidgetState extends State<AllChatsWidget> {
                                             .where((e) =>
                                                 e.reference !=
                                                 FFAppState().pinnedChatRef)
+                                            .toList()
+                                            .sortedList(
+                                                (e) => e.lastMessageTime!)
                                             .toList();
                                     if (filteredChatDocs.isEmpty) {
                                       return const Center(

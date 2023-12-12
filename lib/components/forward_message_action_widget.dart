@@ -6,7 +6,9 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:collection/collection.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'forward_message_action_model.dart';
 export 'forward_message_action_model.dart';
@@ -76,22 +78,30 @@ class _ForwardMessageActionWidgetState
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      'Cancel',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Inter',
-                            fontSize: 16.0,
-                            lineHeight: 1.2,
-                          ),
+                  padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                  child: Container(
+                    width: 75.0,
+                    decoration: const BoxDecoration(),
+                    child: Align(
+                      alignment: const AlignmentDirectional(0.00, 0.00),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          'Cancel',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Inter',
+                                    fontSize: 16.0,
+                                    lineHeight: 1.2,
+                                  ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -104,74 +114,86 @@ class _ForwardMessageActionWidgetState
                         lineHeight: 1.5,
                       ),
                 ),
-                if ((FFAppState().forwardToRef != null) &&
-                    (_model.textController.text != ''))
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
-                    child: InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        _model.forwardMessageDoc =
-                            await queryChatMessagesRecordOnce(
-                          queryBuilder: (chatMessagesRecord) =>
-                              chatMessagesRecord.where(
-                            'chat_message_ref',
-                            isEqualTo: widget.forwardMessageRef,
-                          ),
-                          singleRecord: true,
-                        ).then((s) => s.firstOrNull);
-                        _model.fwdUserDoc = await queryUsersRecordOnce(
-                          queryBuilder: (usersRecord) => usersRecord.where(
-                            'user_ref',
-                            isEqualTo: _model.forwardMessageDoc?.user,
-                          ),
-                          singleRecord: true,
-                        ).then((s) => s.firstOrNull);
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                  child: Container(
+                    width: 75.0,
+                    decoration: const BoxDecoration(),
+                    child: Visibility(
+                      visible: (FFAppState().forwardToRef != null) &&
+                          (_model.textController.text != ''),
+                      child: Align(
+                        alignment: const AlignmentDirectional(0.00, 0.00),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            _model.forwardMessageDoc =
+                                await ChatMessagesRecord.getDocumentOnce(
+                                    widget.forwardMessageRef!);
+                            _model.fwdUserDoc = await queryUsersRecordOnce(
+                              queryBuilder: (usersRecord) => usersRecord.where(
+                                'user_ref',
+                                isEqualTo: _model.forwardMessageDoc?.user,
+                              ),
+                              singleRecord: true,
+                            ).then((s) => s.firstOrNull);
 
-                        var chatMessagesRecordReference =
-                            ChatMessagesRecord.collection.doc();
-                        await chatMessagesRecordReference
-                            .set(createChatMessagesRecordData(
-                          user: currentUserReference,
-                          chat: FFAppState().forwardToRef,
-                          text: functions.fullFwdMessage(
-                              'From ${_model.fwdUserDoc?.displayName} : ${_model.forwardMessageDoc?.text}',
-                              _model.textController.text),
-                          timestamp: getCurrentTimestamp,
-                        ));
-                        _model.createdFwdMessage =
-                            ChatMessagesRecord.getDocumentFromData(
-                                createChatMessagesRecordData(
-                                  user: currentUserReference,
-                                  chat: FFAppState().forwardToRef,
-                                  text: functions.fullFwdMessage(
-                                      'From ${_model.fwdUserDoc?.displayName} : ${_model.forwardMessageDoc?.text}',
-                                      _model.textController.text),
-                                  timestamp: getCurrentTimestamp,
+                            var chatMessagesRecordReference2 =
+                                ChatMessagesRecord.collection.doc();
+                            await chatMessagesRecordReference2
+                                .set(createChatMessagesRecordData(
+                              user: currentUserReference,
+                              chat: FFAppState().forwardToRef,
+                              text: functions.fullFwdMessage(
+                                  'From ${_model.fwdUserDoc?.displayName} : ${_model.forwardMessageDoc?.text}',
+                                  _model.textController.text),
+                              timestamp: getCurrentTimestamp,
+                              isForward: true,
+                              fwdMessageRef: widget.forwardMessageRef,
+                            ));
+                            _model.createdFwdMessage =
+                                ChatMessagesRecord.getDocumentFromData(
+                                    createChatMessagesRecordData(
+                                      user: currentUserReference,
+                                      chat: FFAppState().forwardToRef,
+                                      text: functions.fullFwdMessage(
+                                          'From ${_model.fwdUserDoc?.displayName} : ${_model.forwardMessageDoc?.text}',
+                                          _model.textController.text),
+                                      timestamp: getCurrentTimestamp,
+                                      isForward: true,
+                                      fwdMessageRef: widget.forwardMessageRef,
+                                    ),
+                                    chatMessagesRecordReference2);
+
+                            await _model.createdFwdMessage!.reference
+                                .update(createChatMessagesRecordData(
+                              chatMessageRef:
+                                  _model.createdFwdMessage?.reference,
+                            ));
+                            Navigator.pop(context);
+
+                            context.goNamed('AllChats');
+
+                            setState(() {});
+                          },
+                          child: Text(
+                            'Send',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  fontSize: 16.0,
+                                  lineHeight: 1.2,
                                 ),
-                                chatMessagesRecordReference);
-
-                        await _model.createdFwdMessage!.reference
-                            .update(createChatMessagesRecordData(
-                          chatMessageRef: _model.createdFwdMessage?.reference,
-                        ));
-
-                        setState(() {});
-                      },
-                      child: Text(
-                        'Send',
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
-                              fontSize: 16.0,
-                              lineHeight: 1.2,
-                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
+                ),
               ],
             ),
           ),
@@ -182,25 +204,33 @@ class _ForwardMessageActionWidgetState
           ),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
-            child: TextFormField(
-              controller: _model.textController,
-              focusNode: _model.textFieldFocusNode,
-              autofocus: true,
-              obscureText: false,
-              decoration: InputDecoration(
-                labelStyle: FlutterFlowTheme.of(context).labelMedium,
-                hintText: 'Type a message here, if you’d like',
-                hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                      fontFamily: 'Inter',
-                      color: FlutterFlowTheme.of(context).darkGrey2,
-                    ),
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                errorBorder: InputBorder.none,
-                focusedErrorBorder: InputBorder.none,
+            child: SizedBox(
+              width: double.infinity,
+              child: TextFormField(
+                controller: _model.textController,
+                focusNode: _model.textFieldFocusNode,
+                onChanged: (_) => EasyDebounce.debounce(
+                  '_model.textController',
+                  const Duration(milliseconds: 100),
+                  () => setState(() {}),
+                ),
+                autofocus: true,
+                obscureText: false,
+                decoration: InputDecoration(
+                  labelStyle: FlutterFlowTheme.of(context).labelMedium,
+                  hintText: 'Type a message here, if you’d like',
+                  hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                        fontFamily: 'Inter',
+                        color: FlutterFlowTheme.of(context).darkGrey2,
+                      ),
+                  enabledBorder: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  errorBorder: InputBorder.none,
+                  focusedErrorBorder: InputBorder.none,
+                ),
+                style: FlutterFlowTheme.of(context).bodyMedium,
+                validator: _model.textControllerValidator.asValidator(context),
               ),
-              style: FlutterFlowTheme.of(context).bodyMedium,
-              validator: _model.textControllerValidator.asValidator(context),
             ),
           ),
           Divider(
@@ -287,6 +317,26 @@ class _ForwardMessageActionWidgetState
                                       FFAppState().forwardToRef =
                                           listViewChatsRecord.reference;
                                     });
+                                    ScaffoldMessenger.of(context)
+                                        .clearSnackBars();
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Chat selected',
+                                          style: GoogleFonts.getFont(
+                                            'Inter',
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondary,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 15.0,
+                                          ),
+                                        ),
+                                        duration: const Duration(milliseconds: 1000),
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                      ),
+                                    );
                                   },
                                   child: Container(
                                     width: double.infinity,
@@ -352,6 +402,25 @@ class _ForwardMessageActionWidgetState
                                   FFAppState().forwardToRef =
                                       listViewChatsRecord.reference;
                                 });
+                                ScaffoldMessenger.of(context).clearSnackBars();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Chat selected',
+                                      style: GoogleFonts.getFont(
+                                        'Inter',
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondary,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 15.0,
+                                      ),
+                                    ),
+                                    duration: const Duration(milliseconds: 1000),
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                  ),
+                                );
                               },
                               child: ChannelButtonWidget(
                                 key: Key(

@@ -49,6 +49,11 @@ class ChatMessagesRecord extends FirestoreRecord {
   bool get isForward => _isForward ?? false;
   bool hasIsForward() => _isForward != null;
 
+  // "fwd_message_ref" field.
+  DocumentReference? _fwdMessageRef;
+  DocumentReference? get fwdMessageRef => _fwdMessageRef;
+  bool hasFwdMessageRef() => _fwdMessageRef != null;
+
   void _initializeFields() {
     _user = snapshotData['user'] as DocumentReference?;
     _chat = snapshotData['chat'] as DocumentReference?;
@@ -57,6 +62,7 @@ class ChatMessagesRecord extends FirestoreRecord {
     _timestamp = snapshotData['timestamp'] as DateTime?;
     _chatMessageRef = snapshotData['chat_message_ref'] as DocumentReference?;
     _isForward = snapshotData['is_forward'] as bool?;
+    _fwdMessageRef = snapshotData['fwd_message_ref'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -101,6 +107,7 @@ Map<String, dynamic> createChatMessagesRecordData({
   DateTime? timestamp,
   DocumentReference? chatMessageRef,
   bool? isForward,
+  DocumentReference? fwdMessageRef,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -111,6 +118,7 @@ Map<String, dynamic> createChatMessagesRecordData({
       'timestamp': timestamp,
       'chat_message_ref': chatMessageRef,
       'is_forward': isForward,
+      'fwd_message_ref': fwdMessageRef,
     }.withoutNulls,
   );
 
@@ -129,7 +137,8 @@ class ChatMessagesRecordDocumentEquality
         e1?.image == e2?.image &&
         e1?.timestamp == e2?.timestamp &&
         e1?.chatMessageRef == e2?.chatMessageRef &&
-        e1?.isForward == e2?.isForward;
+        e1?.isForward == e2?.isForward &&
+        e1?.fwdMessageRef == e2?.fwdMessageRef;
   }
 
   @override
@@ -140,7 +149,8 @@ class ChatMessagesRecordDocumentEquality
         e?.image,
         e?.timestamp,
         e?.chatMessageRef,
-        e?.isForward
+        e?.isForward,
+        e?.fwdMessageRef
       ]);
 
   @override
