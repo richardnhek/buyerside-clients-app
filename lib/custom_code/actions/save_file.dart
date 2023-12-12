@@ -15,40 +15,33 @@ import 'package:http/http.dart' as http;
 import 'package:permission_handler/permission_handler.dart';
 
 Future saveFile(String? filePath) async {
-  http.Client? client; // Declare client as nullable
+  http.Client? client;
 
   if (filePath == null || filePath.isEmpty) {
     throw 'File path cannot be null or empty';
   }
 
   try {
-    // Request permission to write to external storage
     var status = await Permission.storage.request();
     if (!status.isGranted) {
       throw 'Storage permission not granted';
     }
 
-    // Create an HTTP client
     client = http.Client();
-
-    // Make a request to download the file
     var response = await client.get(Uri.parse(filePath));
 
     if (response.statusCode == 200) {
-      // Find an external path for download (like Downloads folder)
-      var directory = await getExternalStorageDirectory();
-      String fileName = filePath
-          .split('/')
-          .last
-          .split('?')
-          .first; // Adjusted to remove URL parameters
+      // Use the appropriate directory based on the platform
+      var directory = Platform.isAndroid
+          ? await getExternalStorageDirectory()
+          : await getApplicationDocumentsDirectory();
+
+      String fileName = filePath.split('/').last.split('?').first;
       var file = File('${directory!.path}/$fileName');
 
-      // Write the file
       await file.writeAsBytes(response.bodyBytes);
       print("Saved at ${file.path}");
 
-      // Open the file
       await OpenFile.open(file.path);
 
       return file.path;
@@ -58,9 +51,6 @@ Future saveFile(String? filePath) async {
   } catch (e) {
     throw 'An error occurred while downloading the file: $e';
   } finally {
-    if (client != null) {
-      // Check if client is not null before closing
-      client.close();
-    }
+    client?.close();
   }
 }
