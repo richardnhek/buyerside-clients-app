@@ -428,6 +428,11 @@ class _ForwardMessageActionWidgetState
                                 channelName: listViewChatsRecord.channelName,
                                 isRead: true,
                                 isPinned: false,
+                                lastMsg: listViewChatsRecord.lastMessage,
+                                lastMsgTime:
+                                    listViewChatsRecord.lastMessageTime!,
+                                lastMsgSentBy:
+                                    listViewChatsRecord.lastMessageSentBy!,
                               ),
                             );
                           }

@@ -62,7 +62,7 @@ class _HomeWidgetState extends State<HomeWidget> {
               children: [
                 Container(
                   width: double.infinity,
-                  height: 100.0,
+                  height: 75.0,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                   ),
@@ -85,7 +85,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                 Expanded(
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 35.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
                     child: FlutterFlowWebView(
                       content: _model.selectedSite,
                       bypass: true,
@@ -97,7 +97,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(25.0, 0.0, 25.0, 25.0),
+                      const EdgeInsetsDirectional.fromSTEB(25.0, 0.0, 25.0, 15.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

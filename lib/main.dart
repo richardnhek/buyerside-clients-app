@@ -161,7 +161,7 @@ class _NavBarPageState extends State<NavBarPage> {
               FFIcons.khomeActive,
               size: 18.0,
             ),
-            label: 'Home',
+            label: 'Search',
             tooltip: '',
           ),
           BottomNavigationBarItem(

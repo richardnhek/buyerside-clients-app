@@ -123,7 +123,7 @@ class _AddUserToChatWidgetState extends State<AddUserToChatWidget> {
             centerTitle: false,
             expandedTitleScale: 1.0,
           ),
-          toolbarHeight: 100.0,
+          toolbarHeight: 75.0,
           elevation: 1.0,
         ),
         body: Builder(
