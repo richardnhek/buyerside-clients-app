@@ -132,7 +132,7 @@ class _StartNewChatWidgetState extends State<StartNewChatWidget> {
             centerTitle: false,
             expandedTitleScale: 1.0,
           ),
-          toolbarHeight: 100.0,
+          toolbarHeight: 75.0,
           elevation: 1.0,
         ),
         body: Builder(

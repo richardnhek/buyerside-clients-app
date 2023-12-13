@@ -82,7 +82,7 @@ class _UserDetailWidgetState extends State<UserDetailWidget> {
           ),
           actions: const [],
           centerTitle: false,
-          toolbarHeight: 100.0,
+          toolbarHeight: 75.0,
           elevation: 0.0,
         ),
         body: Align(

@@ -62,24 +62,31 @@ class _AllServicesWidgetState extends State<AllServicesWidget> {
               children: [
                 Container(
                   width: double.infinity,
-                  height: 100.0,
+                  height: 75.0,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                   ),
-                  child: Align(
-                    alignment: const AlignmentDirectional(-1.00, 1.00),
-                    child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 15.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(0.0),
-                        child: Image.asset(
-                          'assets/images/logo.png',
-                          height: 35.0,
-                          fit: BoxFit.cover,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Align(
+                        alignment: const AlignmentDirectional(-1.00, 1.00),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              20.0, 0.0, 0.0, 15.0),
+                          child: Text(
+                            'Services',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  fontSize: 17.0,
+                                  lineHeight: 1.5,
+                                ),
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
                 Divider(
@@ -96,29 +103,15 @@ class _AllServicesWidgetState extends State<AllServicesWidget> {
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 36.0, 0.0, 0.0),
-                            child: Text(
-                              'Our services',
-                              style: FlutterFlowTheme.of(context)
-                                  .titleLarge
-                                  .override(
-                                    fontFamily: 'Inter',
-                                    fontSize: 23.0,
-                                    lineHeight: 1.5,
-                                  ),
-                            ),
-                          ),
                           Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Expanded(
                                 child: Padding(
                                   padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 20.0, 0.0, 0.0),
+                                      0.0, 24.0, 0.0, 0.0),
                                   child: Text(
-                                    'Discover the essential services for your home buying journey.',
+                                    'Ensure you have the services and expertise you need, when you need it. Just tap a tile to learn more about each service',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(

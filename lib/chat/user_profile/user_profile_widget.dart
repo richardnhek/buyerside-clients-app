@@ -93,8 +93,8 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
           ),
           actions: [],
           centerTitle: false,
-          toolbarHeight: 100,
-          elevation: 0,
+          toolbarHeight: 75.0,
+          elevation: 0.0,
         ),
         body: SingleChildScrollView(
           primary: false,
@@ -614,9 +614,10 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                                               fontSize: 15.0,
                                                             ),
                                                           ),
-                                                          duration: const Duration(
-                                                              milliseconds:
-                                                                  1200),
+                                                          duration:
+                                                              const Duration(
+                                                                  milliseconds:
+                                                                      1200),
                                                           backgroundColor:
                                                               FlutterFlowTheme.of(
                                                                       context)

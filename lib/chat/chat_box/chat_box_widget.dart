@@ -96,7 +96,7 @@ class _ChatBoxWidgetState extends State<ChatBoxWidget> {
               children: [
                 Container(
                   width: double.infinity,
-                  height: 100.0,
+                  height: 75.0,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                   ),
@@ -321,7 +321,7 @@ class _ChatBoxWidgetState extends State<ChatBoxWidget> {
             ),
             actions: const [],
             centerTitle: false,
-            toolbarHeight: 100.0,
+            toolbarHeight: 75.0,
             elevation: 0.0,
           )
         ],

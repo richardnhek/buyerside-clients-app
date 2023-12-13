@@ -90,8 +90,8 @@ class _MembersDetailWidgetState extends State<MembersDetailWidget> {
           ),
           actions: [],
           centerTitle: false,
-          toolbarHeight: 100,
-          elevation: 0,
+          toolbarHeight: 75.0,
+          elevation: 0.0,
         ),
         body: FutureBuilder<ChatsRecord>(
           future: ChatsRecord.getDocumentOnce(widget.chatRef!),
@@ -920,9 +920,10 @@ class _MembersDetailWidgetState extends State<MembersDetailWidget> {
                                                                       15.0,
                                                                 ),
                                                               ),
-                                                              duration: const Duration(
-                                                                  milliseconds:
-                                                                      1200),
+                                                              duration:
+                                                                  const Duration(
+                                                                      milliseconds:
+                                                                          1200),
                                                               backgroundColor:
                                                                   FlutterFlowTheme.of(
                                                                           context)

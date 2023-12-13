@@ -92,3 +92,18 @@ String? fullFwdMessage(
 ) {
   return fwdMessage + '\n' + newMessage;
 }
+
+String getMessageTime(DateTime? messageTime) {
+  if (messageTime == null) {
+    return 'No Date';
+  }
+
+  DateTime now = DateTime.now();
+  DateTime justNow = DateTime(now.year, now.month, now.day);
+
+  if (messageTime.isAfter(justNow)) {
+    return '${messageTime.hour.toString().padLeft(2, '0')}:${messageTime.minute.toString().padLeft(2, '0')}';
+  } else {
+    return '${messageTime.day.toString().padLeft(2, '0')}/${messageTime.month.toString().padLeft(2, '0')}/${messageTime.year.toString().substring(2)}';
+  }
+}

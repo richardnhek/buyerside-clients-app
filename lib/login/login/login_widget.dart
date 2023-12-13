@@ -66,7 +66,7 @@ class _LoginWidgetState extends State<LoginWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0, 64, 0, 0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 39.0, 0.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -180,7 +180,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                     onChanged: (_) =>
                                                         EasyDebounce.debounce(
                                                       '_model.phoneNumberController',
-                                                      Duration(
+                                                      const Duration(
                                                           milliseconds: 100),
                                                       () => setState(() {}),
                                                     ),

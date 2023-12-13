@@ -143,8 +143,8 @@ class _NavBarPageState extends State<NavBarPage> {
       // CUSTOM_CODE_STARTED
       bottomNavigationBar: Container(
         color: FlutterFlowTheme.of(context).secondaryBackground,
-        padding: const EdgeInsets.only(bottom: 15),
-        height: 100,
+        padding: const EdgeInsets.only(bottom: 5),
+        height: 75,
         child: Column(
           children: [
             Divider(
@@ -192,7 +192,7 @@ class _NavBarPageState extends State<NavBarPage> {
                         FFIcons.khomeActive,
                         size: 18.0,
                       ),
-                      label: 'Home',
+                      label: 'Search',
                       tooltip: '',
                     ),
                     BottomNavigationBarItem(

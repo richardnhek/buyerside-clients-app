@@ -152,68 +152,83 @@ class _FFChatPageState extends State<FFChatPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Stack(
-        children: [
-          FFChatWidget(
-            currentUser: currentUser,
-            otherUser: otherUser,
-            otherUsers: otherUsersList,
-            scrollController: scrollController,
-            focusNode: focusNode,
-            onMessageDeleted: handleMessageDeleted,
-            messages: messages
-                .map(
-                  (message) => ChatMessage(
-                    user: message.user?.id == currentUser.id
-                        ? currentUser
-                        : otherUsers[message.user?.id]!,
-                    text: message.text,
-                    createdAt: message.timestamp!,
-                    customProperties: {
-                      'reference': message.reference,
-                      'image': message.image // Custom property
-                    },
-                  ),
-                )
-                .toList(),
-            onSend: (message) => sendMessage(
-                text: message.text, imageUrl: message.medias?[0].url),
-            uploadMediaAction: widget.allowImages
-                ? () async {
-                    final selectedMedia =
-                        await selectMediaWithSourceBottomSheet(
-                      pickerFontFamily: 'Inter',
-                      context: context,
-                      allowPhoto: true,
-                      allowVideo: true,
-                    ).then((m) => m != null && m.isNotEmpty ? m.first : null);
-                    if (selectedMedia == null ||
-                        !validateFileFormat(
-                            selectedMedia.storagePath, context)) {
-                      return;
-                    }
-                    showUploadMessage(
-                      context,
-                      'Sending photo',
-                      showLoading: true,
-                    );
-                    final downloadUrl = await uploadData(
-                        selectedMedia.storagePath, selectedMedia.bytes);
-                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                    await sendMessage(imageUrl: downloadUrl);
-                  }
-                : null,
-            backgroundColor: widget.backgroundColor,
-            timeDisplaySetting: widget.timeDisplaySetting,
-            currentUserBoxDecoration: widget.currentUserBoxDecoration,
-            otherUsersBoxDecoration: widget.otherUsersBoxDecoration,
-            currentUserTextStyle: widget.currentUserTextStyle,
-            otherUsersTextStyle: widget.otherUsersTextStyle,
-            inputHintTextStyle: widget.inputHintTextStyle,
-            inputTextStyle: widget.inputTextStyle,
-            emptyChatWidget: widget.emptyChatWidget,
+  Widget build(BuildContext context) => WillPopScope(
+        onWillPop: () async {
+          Navigator.of(context).pop();
+          return true;
+        },
+        child: GestureDetector(
+          onHorizontalDragEnd: (details) {
+            if (details.primaryVelocity! > 0) {
+              // Recognizes a swipe to the right, which is treated as a 'back' gesture
+              Navigator.of(context).pop();
+            }
+          },
+          child: Stack(
+            children: [
+              FFChatWidget(
+                currentUser: currentUser,
+                otherUser: otherUser,
+                otherUsers: otherUsersList,
+                scrollController: scrollController,
+                focusNode: focusNode,
+                onMessageDeleted: handleMessageDeleted,
+                messages: messages
+                    .map(
+                      (message) => ChatMessage(
+                        user: message.user?.id == currentUser.id
+                            ? currentUser
+                            : otherUsers[message.user?.id]!,
+                        text: message.text,
+                        createdAt: message.timestamp!,
+                        customProperties: {
+                          'reference': message.reference,
+                          'image': message.image // Custom property
+                        },
+                      ),
+                    )
+                    .toList(),
+                onSend: (message) => sendMessage(
+                    text: message.text, imageUrl: message.medias?[0].url),
+                uploadMediaAction: widget.allowImages
+                    ? () async {
+                        final selectedMedia =
+                            await selectMediaWithSourceBottomSheet(
+                          pickerFontFamily: 'Inter',
+                          context: context,
+                          allowPhoto: true,
+                          allowVideo: true,
+                        ).then((m) =>
+                                m != null && m.isNotEmpty ? m.first : null);
+                        if (selectedMedia == null ||
+                            !validateFileFormat(
+                                selectedMedia.storagePath, context)) {
+                          return;
+                        }
+                        showUploadMessage(
+                          context,
+                          'Sending photo',
+                          showLoading: true,
+                        );
+                        final downloadUrl = await uploadData(
+                            selectedMedia.storagePath, selectedMedia.bytes);
+                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        await sendMessage(imageUrl: downloadUrl);
+                      }
+                    : null,
+                backgroundColor: widget.backgroundColor,
+                timeDisplaySetting: widget.timeDisplaySetting,
+                currentUserBoxDecoration: widget.currentUserBoxDecoration,
+                otherUsersBoxDecoration: widget.otherUsersBoxDecoration,
+                currentUserTextStyle: widget.currentUserTextStyle,
+                otherUsersTextStyle: widget.otherUsersTextStyle,
+                inputHintTextStyle: widget.inputHintTextStyle,
+                inputTextStyle: widget.inputTextStyle,
+                emptyChatWidget: widget.emptyChatWidget,
+              ),
+            ],
           ),
-        ],
+        ),
       );
 }
 
