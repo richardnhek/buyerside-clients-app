@@ -218,9 +218,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                     focusedBorder: InputBorder.none,
                                     errorBorder: InputBorder.none,
                                     focusedErrorBorder: InputBorder.none,
-                                    contentPadding:
-                                        const EdgeInsetsDirectional.fromSTEB(
-                                            10.0, 10.0, 10.0, 10.0),
+                                    contentPadding: const EdgeInsets.all(10.0),
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .headlineMedium
@@ -404,7 +402,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                 ),
                                               ),
                                               alignment: const AlignmentDirectional(
-                                                  0.00, 0.00),
+                                                  0.0, 0.0),
                                               child: Text(
                                                 'Upload',
                                                 style:
@@ -463,7 +461,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                 ),
                                               ),
                                               alignment: const AlignmentDirectional(
-                                                  0.00, 0.00),
+                                                  0.0, 0.0),
                                               child: Text(
                                                 'Remove',
                                                 style:
@@ -521,8 +519,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   text: 'Discard changes',
                                   options: FFButtonOptions(
                                     height: 50.0,
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
+                                    padding: const EdgeInsets.all(0.0),
                                     iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color: const Color(0x00FFFFFF),
@@ -566,8 +563,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   text: 'Save Changes',
                                   options: FFButtonOptions(
                                     height: 50.0,
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
+                                    padding: const EdgeInsets.all(0.0),
                                     iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color: FlutterFlowTheme.of(context).accent1,
@@ -685,9 +681,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                     focusedBorder: InputBorder.none,
                                     errorBorder: InputBorder.none,
                                     focusedErrorBorder: InputBorder.none,
-                                    contentPadding:
-                                        const EdgeInsetsDirectional.fromSTEB(
-                                            10.0, 10.0, 10.0, 10.0),
+                                    contentPadding: const EdgeInsets.all(10.0),
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .headlineMedium
@@ -727,8 +721,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   text: 'Discard changes',
                                   options: FFButtonOptions(
                                     height: 50.0,
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
+                                    padding: const EdgeInsets.all(0.0),
                                     iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color: const Color(0x00FFFFFF),

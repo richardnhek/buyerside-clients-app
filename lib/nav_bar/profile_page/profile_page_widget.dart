@@ -89,7 +89,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                   ),
                   child: Align(
-                    alignment: const AlignmentDirectional(-1.00, 1.00),
+                    alignment: const AlignmentDirectional(-1.0, 1.0),
                     child: Padding(
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 15.0),
@@ -195,8 +195,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                             focusedErrorBorder:
                                                 InputBorder.none,
                                             contentPadding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    10.0, 10.0, 10.0, 10.0),
+                                                const EdgeInsets.all(10.0),
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .headlineMedium
@@ -385,7 +384,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                   ),
                                                   alignment:
                                                       const AlignmentDirectional(
-                                                          0.00, 0.00),
+                                                          0.0, 0.0),
                                                   child: Text(
                                                     'Upload',
                                                     style: FlutterFlowTheme.of(
@@ -448,7 +447,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                   ),
                                                   alignment:
                                                       const AlignmentDirectional(
-                                                          0.00, 0.00),
+                                                          0.0, 0.0),
                                                   child: Text(
                                                     'Remove',
                                                     style: FlutterFlowTheme.of(
@@ -505,9 +504,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                         text: 'Discard changes',
                                         options: FFButtonOptions(
                                           height: 50.0,
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
+                                          padding: const EdgeInsets.all(0.0),
                                           iconPadding:
                                               const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
@@ -617,9 +614,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                         text: 'Save Changes',
                                         options: FFButtonOptions(
                                           height: 50.0,
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
+                                          padding: const EdgeInsets.all(0.0),
                                           iconPadding:
                                               const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
@@ -755,8 +750,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                             focusedErrorBorder:
                                                 InputBorder.none,
                                             contentPadding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    10.0, 10.0, 10.0, 10.0),
+                                                const EdgeInsets.all(10.0),
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .headlineMedium
@@ -800,9 +794,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                         text: 'Discard changes',
                                         options: FFButtonOptions(
                                           height: 50.0,
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
+                                          padding: const EdgeInsets.all(0.0),
                                           iconPadding:
                                               const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
@@ -901,8 +893,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                             options: FFButtonOptions(
                               width: 140.0,
                               height: 50.0,
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
+                              padding: const EdgeInsets.all(0.0),
                               iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               color: Colors.transparent,

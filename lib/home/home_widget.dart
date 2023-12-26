@@ -67,7 +67,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                   ),
                   child: Align(
-                    alignment: const AlignmentDirectional(-1.00, 1.00),
+                    alignment: const AlignmentDirectional(-1.0, 1.0),
                     child: Padding(
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 15.0),

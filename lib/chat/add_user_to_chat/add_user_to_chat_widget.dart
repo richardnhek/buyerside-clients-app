@@ -94,7 +94,7 @@ class _AddUserToChatWidgetState extends State<AddUserToChatWidget> {
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
           leading: Align(
-            alignment: const AlignmentDirectional(-1.00, 1.00),
+            alignment: const AlignmentDirectional(-1.0, 1.0),
             child: FlutterFlowIconButton(
               borderColor: Colors.transparent,
               borderRadius: 30.0,
@@ -134,10 +134,9 @@ class _AddUserToChatWidgetState extends State<AddUserToChatWidget> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Align(
-                    alignment: const AlignmentDirectional(-1.00, -1.00),
+                    alignment: const AlignmentDirectional(-1.0, -1.0),
                     child: Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
-                          20.0, 20.0, 20.0, 20.0),
+                      padding: const EdgeInsets.all(20.0),
                       child: Builder(
                         builder: (context) {
                           final addedUserList = _model.addedUsersUID.toList();
@@ -409,8 +408,7 @@ class _AddUserToChatWidgetState extends State<AddUserToChatWidget> {
                       options: FFButtonOptions(
                         width: double.infinity,
                         height: 50.0,
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        padding: const EdgeInsets.all(0.0),
                         iconPadding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).accent1,

@@ -213,6 +213,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           requireAuth: true,
           builder: (context, params) =>
               params.isEmpty ? const NavBarPage(initialPage: 'Home') : const HomeWidget(),
+        ),
+        FFRoute(
+          name: 'BuyerAgent',
+          path: '/buyerAgent',
+          builder: (context, params) => const BuyerAgentWidget(),
+        ),
+        FFRoute(
+          name: 'WebViewPage',
+          path: '/webViewPage',
+          builder: (context, params) => WebViewPageWidget(
+            iframeUrl: params.getParam('iframeUrl', ParamType.String),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -411,13 +423,20 @@ class FFRoute {
                   key: state.pageKey,
                   child: child,
                   transitionDuration: transitionInfo.duration,
-                  transitionsBuilder: PageTransition(
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) =>
+                          PageTransition(
                     type: transitionInfo.transitionType,
                     duration: transitionInfo.duration,
                     reverseDuration: transitionInfo.duration,
                     alignment: transitionInfo.alignment,
                     child: child,
-                  ).transitionsBuilder,
+                  ).buildTransitions(
+                    context,
+                    animation,
+                    secondaryAnimation,
+                    child,
+                  ),
                 )
               : MaterialPage(key: state.pageKey, child: child);
         },

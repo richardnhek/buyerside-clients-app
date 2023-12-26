@@ -42,8 +42,9 @@ class MailMessageStruct extends FFFirebaseStruct {
         html: data['html'] as String?,
       );
 
-  static MailMessageStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? MailMessageStruct.fromMap(data) : null;
+  static MailMessageStruct? maybeFromMap(dynamic data) => data is Map
+      ? MailMessageStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'subject': _subject,

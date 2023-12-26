@@ -92,7 +92,7 @@ class _ChatBoxWidgetState extends State<ChatBoxWidget> {
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                   ),
-                  alignment: const AlignmentDirectional(-1.00, 1.00),
+                  alignment: const AlignmentDirectional(-1.0, 1.0),
                   child: Builder(
                     builder: (context) {
                       if (isGroupChat() == false) {
@@ -289,7 +289,7 @@ class _ChatBoxWidgetState extends State<ChatBoxWidget> {
                                                         fontFamily: 'Inter',
                                                         fontSize: 17.0,
                                                         fontWeight:
-                                                            FontWeight.w500,
+                                                            FontWeight.bold,
                                                       ),
                                                 ),
                                               );

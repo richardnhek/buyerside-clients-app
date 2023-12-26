@@ -85,7 +85,7 @@ class _DirectMessageButtonWidgetState extends State<DirectMessageButtonWidget> {
             color: Colors.transparent,
           ),
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
+            padding: const EdgeInsets.all(5.0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: [

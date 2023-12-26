@@ -56,10 +56,9 @@ class WorkspaceOverviewStruct extends FFFirebaseStruct {
         clients: getDataList(data['clients']),
       );
 
-  static WorkspaceOverviewStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic>
-          ? WorkspaceOverviewStruct.fromMap(data)
-          : null;
+  static WorkspaceOverviewStruct? maybeFromMap(dynamic data) => data is Map
+      ? WorkspaceOverviewStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'current_status': _currentStatus,

@@ -83,7 +83,7 @@ class _ForwardMessageActionWidgetState
                     width: 75.0,
                     decoration: const BoxDecoration(),
                     child: Align(
-                      alignment: const AlignmentDirectional(0.00, 0.00),
+                      alignment: const AlignmentDirectional(0.0, 0.0),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -123,7 +123,7 @@ class _ForwardMessageActionWidgetState
                       visible: (FFAppState().forwardToRef != null) &&
                           (_model.textController.text != ''),
                       child: Align(
-                        alignment: const AlignmentDirectional(0.00, 0.00),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: InkWell(
                           splashColor: Colors.transparent,
                           focusColor: Colors.transparent,

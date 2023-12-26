@@ -70,7 +70,7 @@ class _MembersDetailWidgetState extends State<MembersDetailWidget> {
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
           leading: Align(
-            alignment: const AlignmentDirectional(-1.00, 1.00),
+            alignment: const AlignmentDirectional(-1.0, 1.0),
             child: FlutterFlowIconButton(
               borderColor: Colors.transparent,
               borderRadius: 30.0,
@@ -145,7 +145,7 @@ class _MembersDetailWidgetState extends State<MembersDetailWidget> {
                       return Container(
                         decoration: const BoxDecoration(),
                         child: Align(
-                          alignment: const AlignmentDirectional(-1.00, -1.00),
+                          alignment: const AlignmentDirectional(-1.0, -1.0),
                           child: Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 20.0, 20.0, 20.0, 0.0),
@@ -323,7 +323,7 @@ class _MembersDetailWidgetState extends State<MembersDetailWidget> {
                                             .darkGrey3,
                                       ),
                                     ),
-                                    alignment: const AlignmentDirectional(0.00, 0.00),
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
@@ -409,7 +409,7 @@ class _MembersDetailWidgetState extends State<MembersDetailWidget> {
                                         width: 0.0,
                                       ),
                                     ),
-                                    alignment: const AlignmentDirectional(0.00, 0.00),
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
@@ -458,7 +458,7 @@ class _MembersDetailWidgetState extends State<MembersDetailWidget> {
                                   color: Colors.transparent,
                                 ),
                                 child: Align(
-                                  alignment: const AlignmentDirectional(0.00, 0.00),
+                                  alignment: const AlignmentDirectional(0.0, 0.0),
                                   child: SizedBox(
                                     width: 50.0,
                                     height: 50.0,
@@ -478,7 +478,7 @@ class _MembersDetailWidgetState extends State<MembersDetailWidget> {
                           },
                         ),
                         Align(
-                          alignment: const AlignmentDirectional(1.00, 0.00),
+                          alignment: const AlignmentDirectional(1.0, 0.0),
                           child: Material(
                             color: Colors.transparent,
                             elevation: 0.0,
@@ -536,7 +536,7 @@ class _MembersDetailWidgetState extends State<MembersDetailWidget> {
                     color: FlutterFlowTheme.of(context).darkGrey3,
                   ),
                   Align(
-                    alignment: const AlignmentDirectional(-1.00, -1.00),
+                    alignment: const AlignmentDirectional(-1.0, -1.0),
                     child: Padding(
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
@@ -621,7 +621,7 @@ class _MembersDetailWidgetState extends State<MembersDetailWidget> {
                           ),
                         ),
                         Align(
-                          alignment: const AlignmentDirectional(-1.00, -1.00),
+                          alignment: const AlignmentDirectional(-1.0, -1.0),
                           child: FutureBuilder<List<UsersRecord>>(
                             future: queryUsersRecordOnce(
                               queryBuilder: (usersRecord) => usersRecord
@@ -740,8 +740,7 @@ class _MembersDetailWidgetState extends State<MembersDetailWidget> {
                         ),
                       ),
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            15.0, 15.0, 15.0, 15.0),
+                        padding: const EdgeInsets.all(15.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,

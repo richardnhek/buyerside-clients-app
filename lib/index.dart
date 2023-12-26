@@ -20,3 +20,5 @@ export '/profile/profile_widget.dart' show ProfileWidget;
 export '/start_new_chat/start_new_chat_widget.dart' show StartNewChatWidget;
 export '/group_chat/team/team_widget.dart' show TeamWidget;
 export '/home/home_widget.dart' show HomeWidget;
+export '/buyer_agent/buyer_agent_widget.dart' show BuyerAgentWidget;
+export '/web_view_page/web_view_page_widget.dart' show WebViewPageWidget;

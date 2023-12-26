@@ -71,8 +71,9 @@ class WorkspaceFileStruct extends FFFirebaseStruct {
         fileName: data['fileName'] as String?,
       );
 
-  static WorkspaceFileStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? WorkspaceFileStruct.fromMap(data) : null;
+  static WorkspaceFileStruct? maybeFromMap(dynamic data) => data is Map
+      ? WorkspaceFileStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'fileUrl': _fileUrl,

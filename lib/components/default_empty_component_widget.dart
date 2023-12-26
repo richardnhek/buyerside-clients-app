@@ -41,7 +41,7 @@ class _DefaultEmptyComponentWidgetState
     context.watch<FFAppState>();
 
     return Align(
-      alignment: const AlignmentDirectional(0.00, 0.00),
+      alignment: const AlignmentDirectional(0.0, 0.0),
       child: Text(
         'Empty',
         style: FlutterFlowTheme.of(context).bodyMedium.override(

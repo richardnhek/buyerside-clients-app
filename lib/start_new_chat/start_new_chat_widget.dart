@@ -103,7 +103,7 @@ class _StartNewChatWidgetState extends State<StartNewChatWidget> {
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
           leading: Align(
-            alignment: const AlignmentDirectional(-1.00, 1.00),
+            alignment: const AlignmentDirectional(-1.0, 1.0),
             child: FlutterFlowIconButton(
               borderColor: Colors.transparent,
               borderRadius: 30.0,
@@ -292,9 +292,7 @@ class _StartNewChatWidgetState extends State<StartNewChatWidget> {
                                                 color: Colors.transparent,
                                               ),
                                               child: Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        5.0, 5.0, 5.0, 5.0),
+                                                padding: const EdgeInsets.all(5.0),
                                                 child: Row(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
@@ -360,8 +358,7 @@ class _StartNewChatWidgetState extends State<StartNewChatWidget> {
                                           .primaryBtnText,
                                     ),
                                     child: Align(
-                                      alignment:
-                                          const AlignmentDirectional(0.00, 0.00),
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
                                       child: SizedBox(
                                         width: 100.0,
                                         height: 100.0,
@@ -403,7 +400,7 @@ class _StartNewChatWidgetState extends State<StartNewChatWidget> {
                   color: FlutterFlowTheme.of(context).primaryBtnText,
                 ),
                 child: Align(
-                  alignment: const AlignmentDirectional(0.00, 0.00),
+                  alignment: const AlignmentDirectional(0.0, 0.0),
                   child: SizedBox(
                     width: 100.0,
                     height: 100.0,
