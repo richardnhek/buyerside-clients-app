@@ -207,7 +207,7 @@ class _FFChatPageState extends State<FFChatPage> {
                         }
                         showUploadMessage(
                           context,
-                          'Sending photo',
+                          'Sending file',
                           showLoading: true,
                         );
                         final downloadUrl = await uploadData(

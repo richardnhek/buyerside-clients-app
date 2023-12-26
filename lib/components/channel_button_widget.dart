@@ -165,8 +165,8 @@ class _ChannelButtonWidgetState extends State<ChannelButtonWidget> {
                                   if (!snapshot.hasData) {
                                     return Center(
                                       child: SizedBox(
-                                        width: 50.0,
-                                        height: 50.0,
+                                        width: 14.0,
+                                        height: 14.0,
                                         child: CircularProgressIndicator(
                                           valueColor:
                                               AlwaysStoppedAnimation<Color>(

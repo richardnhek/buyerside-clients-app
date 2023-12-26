@@ -13,6 +13,7 @@ import '../auth/firebase_auth/auth_util.dart';
 import 'flutter_flow_theme.dart';
 import 'flutter_flow_util.dart';
 
+// CUSTOM_CODE_STARTED
 const allowedFormats = {
   'image/png',
   'image/jpeg',
@@ -24,6 +25,7 @@ const allowedFormats = {
   'text/plain'
 };
 
+// CUSTOM_CODE_ENDED
 class SelectedFile {
   const SelectedFile({
     this.storagePath = '',
