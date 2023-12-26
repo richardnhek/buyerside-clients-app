@@ -160,6 +160,12 @@ final parametersBuilderMap =
   'StartNewChat': ParameterData.none(),
   'Team': ParameterData.none(),
   'Home': ParameterData.none(),
+  'BuyerAgent': ParameterData.none(),
+  'WebViewPage': (data) async => ParameterData(
+        allParams: {
+          'iframeUrl': getParameter<String>(data, 'iframeUrl'),
+        },
+      ),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

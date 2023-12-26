@@ -71,7 +71,7 @@ class _LoginWidgetState extends State<LoginWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Align(
-                  alignment: AlignmentDirectional(-1.00, -1.00),
+                  alignment: const AlignmentDirectional(-1.0, -1.0),
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
                     child: ClipRRect(
@@ -95,7 +95,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                     ),
-                    alignment: AlignmentDirectional(0.00, -1.00),
+                    alignment: const AlignmentDirectional(0.0, -1.0),
                     child: Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 50),
                       child: Column(
@@ -103,7 +103,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Align(
-                            alignment: AlignmentDirectional(0.00, 0.00),
+                            alignment: const AlignmentDirectional(0.0, 0.0),
                             child: Padding(
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
@@ -144,8 +144,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Align(
-                                          alignment: AlignmentDirectional(
-                                              -1.00, -1.00),
+                                          alignment: const AlignmentDirectional(
+                                              -1.0, -1.0),
                                           child: Text(
                                             'Phone number',
                                             style: FlutterFlowTheme.of(context)
@@ -170,8 +170,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                               Expanded(
                                                 child: Align(
                                                   alignment:
-                                                      AlignmentDirectional(
-                                                          0.00, 0.00),
+                                                      const AlignmentDirectional(
+                                                          0.0, 0.0),
                                                   child: TextFormField(
                                                     controller: _model
                                                         .phoneNumberController,
@@ -313,9 +313,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                               .of(context)
                                                           .secondaryBackground,
                                                       contentPadding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(10, 10,
-                                                                  10, 10),
+                                                          const EdgeInsets.all(
+                                                              10.0),
                                                     ),
                                                     style: FlutterFlowTheme.of(
                                                             context)

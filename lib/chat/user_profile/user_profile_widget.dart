@@ -75,7 +75,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
           leading: Align(
-            alignment: AlignmentDirectional(-1.00, 1.00),
+            alignment: const AlignmentDirectional(-1.0, 1.0),
             child: FlutterFlowIconButton(
               borderColor: Colors.transparent,
               borderRadius: 30,
@@ -107,7 +107,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                 color: FlutterFlowTheme.of(context).darkGrey3,
               ),
               Align(
-                alignment: AlignmentDirectional(0.00, -1.00),
+                alignment: const AlignmentDirectional(0.0, -1.0),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                   child: Column(
@@ -224,7 +224,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                         FlutterFlowTheme.of(context).darkGrey3,
                                   ),
                                 ),
-                                alignment: AlignmentDirectional(0.00, 0.00),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -306,7 +306,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                     width: 0,
                                   ),
                                 ),
-                                alignment: AlignmentDirectional(0.00, 0.00),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -352,7 +352,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                               color: Colors.transparent,
                             ),
                             child: Align(
-                              alignment: const AlignmentDirectional(0.00, 0.00),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
                               child: SizedBox(
                                 width: 50.0,
                                 height: 50.0,
@@ -388,7 +388,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                             color: Colors.transparent,
                           ),
                         ),
-                        alignment: AlignmentDirectional(0.00, 0.00),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -442,7 +442,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                     ),
                   ),
                   child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(15, 15, 15, 15),
+                    padding: const EdgeInsets.all(15.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -788,9 +788,10 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                     text: 'Close conversation',
                     options: FFButtonOptions(
                       width: double.infinity,
-                      height: 45,
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                      iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                      height: 45.0,
+                      padding: const EdgeInsets.all(0.0),
+                      iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primaryBtnText,
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(

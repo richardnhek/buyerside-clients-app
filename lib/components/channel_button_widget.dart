@@ -85,7 +85,7 @@ class _ChannelButtonWidgetState extends State<ChannelButtonWidget> {
                   ),
                   if (widget.isRead == false)
                     Align(
-                      alignment: const AlignmentDirectional(0.80, 0.80),
+                      alignment: const AlignmentDirectional(0.8, 0.8),
                       child: Container(
                         width: 10.0,
                         height: 10.0,

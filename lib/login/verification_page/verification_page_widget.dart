@@ -73,7 +73,7 @@ class _VerificationPageWidgetState extends State<VerificationPageWidget> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Align(
-                  alignment: const AlignmentDirectional(-1.00, -1.00),
+                  alignment: const AlignmentDirectional(-1.0, -1.0),
                   child: Padding(
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
@@ -120,7 +120,7 @@ class _VerificationPageWidgetState extends State<VerificationPageWidget> {
                                 ),
                               ),
                               Align(
-                                alignment: const AlignmentDirectional(-1.00, 0.00),
+                                alignment: const AlignmentDirectional(-1.0, 0.0),
                                 child: Padding(
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       20.0, 50.0, 0.0, 0.0),
@@ -168,7 +168,12 @@ class _VerificationPageWidgetState extends State<VerificationPageWidget> {
                                     fieldHeight: 50.0,
                                     fieldWidth: 50.0,
                                     borderWidth: 1.0,
-                                    borderRadius: BorderRadius.circular(8.0),
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.circular(8.0),
+                                      bottomRight: Radius.circular(8.0),
+                                      topLeft: Radius.circular(8.0),
+                                      topRight: Radius.circular(8.0),
+                                    ),
                                     shape: PinCodeFieldShape.box,
                                     activeColor:
                                         FlutterFlowTheme.of(context).primary,

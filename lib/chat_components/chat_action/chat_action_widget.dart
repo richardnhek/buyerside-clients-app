@@ -123,7 +123,7 @@ class _ChatActionWidgetState extends State<ChatActionWidget> {
             color: Color(0x1514181B),
           ),
           Align(
-            alignment: const AlignmentDirectional(-1.00, -1.00),
+            alignment: const AlignmentDirectional(-1.0, -1.0),
             child: Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
               child: InkWell(

@@ -69,7 +69,7 @@ class _TeamWidgetState extends State<TeamWidget> {
             ),
             actions: [
               Align(
-                alignment: const AlignmentDirectional(0.00, 0.00),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 20.0, 0.0),
                   child: Icon(
@@ -136,7 +136,7 @@ class _TeamWidgetState extends State<TeamWidget> {
                             color:
                                 FlutterFlowTheme.of(context).primaryBackground,
                           ),
-                          alignment: const AlignmentDirectional(0.00, 0.00),
+                          alignment: const AlignmentDirectional(0.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -245,7 +245,7 @@ class _TeamWidgetState extends State<TeamWidget> {
                             color:
                                 FlutterFlowTheme.of(context).primaryBackground,
                           ),
-                          alignment: const AlignmentDirectional(0.00, 0.00),
+                          alignment: const AlignmentDirectional(0.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -354,7 +354,7 @@ class _TeamWidgetState extends State<TeamWidget> {
                             color:
                                 FlutterFlowTheme.of(context).primaryBackground,
                           ),
-                          alignment: const AlignmentDirectional(0.00, 0.00),
+                          alignment: const AlignmentDirectional(0.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.start,

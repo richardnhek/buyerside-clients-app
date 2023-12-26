@@ -64,7 +64,7 @@ class _UserDetailWidgetState extends State<UserDetailWidget> {
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
           leading: Align(
-            alignment: const AlignmentDirectional(-1.00, 1.00),
+            alignment: const AlignmentDirectional(-1.0, 1.0),
             child: FlutterFlowIconButton(
               borderColor: Colors.transparent,
               borderRadius: 30.0,
@@ -86,7 +86,7 @@ class _UserDetailWidgetState extends State<UserDetailWidget> {
           elevation: 0.0,
         ),
         body: Align(
-          alignment: const AlignmentDirectional(0.00, 0.00),
+          alignment: const AlignmentDirectional(0.0, 0.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [

@@ -101,7 +101,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Align(
-                      alignment: const AlignmentDirectional(-1.00, 1.00),
+                      alignment: const AlignmentDirectional(-1.0, 1.0),
                       child: Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(
                             20.0, 0.0, 0.0, 15.0),
@@ -297,9 +297,9 @@ class _AllChatsWidgetState extends State<AllChatsWidget> {
                                                                     false)
                                                                   Align(
                                                                     alignment:
-                                                                        AlignmentDirectional(
-                                                                            0.80,
-                                                                            0.80),
+                                                                        const AlignmentDirectional(
+                                                                            0.8,
+                                                                            0.8),
                                                                     child:
                                                                         Container(
                                                                       width: 10,
@@ -456,48 +456,41 @@ class _AllChatsWidgetState extends State<AllChatsWidget> {
                                         },
                                       );
                                     } else {
-                                      return Padding(
-                                        padding: const EdgeInsetsDirectional
-                                            .fromSTEB(5.0, 0.0, 5.0, 0.0),
-                                        child: InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            context.pushNamed(
-                                              'ChatBox',
-                                              queryParameters: {
-                                                'chatRef': serializeParam(
-                                                  containerChatsRecord
-                                                      .reference,
-                                                  ParamType.DocumentReference,
-                                                ),
-                                              }.withoutNulls,
-                                            );
-                                          },
-                                          child: wrapWithModel(
-                                            model: _model.channelButtonModel1,
-                                            updateCallback: () =>
-                                                setState(() {}),
-                                            updateOnChange: true,
-                                            child: ChannelButtonWidget(
-                                              channelName: containerChatsRecord
-                                                  .channelName,
-                                              isRead: containerChatsRecord
-                                                      .lastMessageSeenBy
-                                                      .contains(
-                                                          currentUserReference) ==
-                                                  true,
-                                              isPinned: true,
-                                              lastMsg: containerChatsRecord
-                                                  .lastMessage,
-                                              lastMsgTime: containerChatsRecord
-                                                  .lastMessageTime!,
-                                              lastMsgSentBy:
-                                                  containerChatsRecord
-                                                      .lastMessageSentBy!,
-                                            ),
+                                      return InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          context.pushNamed(
+                                            'ChatBox',
+                                            queryParameters: {
+                                              'chatRef': serializeParam(
+                                                containerChatsRecord.reference,
+                                                ParamType.DocumentReference,
+                                              ),
+                                            }.withoutNulls,
+                                          );
+                                        },
+                                        child: wrapWithModel(
+                                          model: _model.channelButtonModel1,
+                                          updateCallback: () => setState(() {}),
+                                          updateOnChange: true,
+                                          child: ChannelButtonWidget(
+                                            channelName: containerChatsRecord
+                                                .channelName,
+                                            isRead: containerChatsRecord
+                                                    .lastMessageSeenBy
+                                                    .contains(
+                                                        currentUserReference) ==
+                                                true,
+                                            isPinned: true,
+                                            lastMsg: containerChatsRecord
+                                                .lastMessage,
+                                            lastMsgTime: containerChatsRecord
+                                                .lastMessageTime!,
+                                            lastMsgSentBy: containerChatsRecord
+                                                .lastMessageSentBy!,
                                           ),
                                         ),
                                       );
@@ -683,9 +676,10 @@ class _AllChatsWidgetState extends State<AllChatsWidget> {
                                                                               currentUserReference) ==
                                                                       false)
                                                                     Align(
-                                                                      alignment: const AlignmentDirectional(
-                                                                          0.80,
-                                                                          0.80),
+                                                                      alignment:
+                                                                          const AlignmentDirectional(
+                                                                              0.8,
+                                                                              0.8),
                                                                       child:
                                                                           Container(
                                                                         width:

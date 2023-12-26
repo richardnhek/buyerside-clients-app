@@ -54,7 +54,7 @@ class _ReferWidgetState extends State<ReferWidget> {
         body: SafeArea(
           top: true,
           child: Align(
-            alignment: const AlignmentDirectional(0.00, 0.00),
+            alignment: const AlignmentDirectional(0.0, 0.0),
             child: Text(
               'Coming Soon',
               style: FlutterFlowTheme.of(context).bodyMedium.override(
